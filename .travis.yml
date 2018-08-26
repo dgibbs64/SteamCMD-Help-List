@@ -1,0 +1,19 @@
+language: bash
+dist: trusty
+sudo: required
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - lib32gcc1
+    - libstdc++6
+    - libstdc++6:i386
+    - git
+
+script:
+  - bash ./steamcmd_help.sh
+
+after_success:
+  - .travis/push.sh
