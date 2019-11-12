@@ -29,7 +29,7 @@ echo "Getting SteamCMD Help"
 echo "================================="
 cd "${rootdir}/steamcmd"
 
-echo "./steamcmd.sh +login anonymous
+echo "./steamcmd.sh +login anonymous"
 ./steamcmd.sh +login anonymous +quit
 echo "help:" > "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help +quit"
