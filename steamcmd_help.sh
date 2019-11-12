@@ -33,38 +33,25 @@ echo "help:" > "${rootdir}/steamcmd_help.txt"
 ./steamcmd.sh +login anonymous +help +quit > "${rootdir}/steamcmd_help.txt"
 echo "help Login:" > "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help login +quit"
-./steamcmd.sh +login anonymous +help login +quit > "${rootdir}/steamcmd_help.txt"
+./steamcmd.sh +login anonymous +help login +quit >> "${rootdir}/steamcmd_help.txt"
 echo "help Scripts:" > "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help scripts +quit"
-./steamcmd.sh +login anonymous +help scripts +quit > "${rootdir}/steamcmd_help.txt"
+./steamcmd.sh +login anonymous +help scripts +quit >> "${rootdir}/steamcmd_help.txt"
 echo "help commandline:"
 echo "./steamcmd.sh +login anonymous +help commandline +quit"
-./steamcmd.sh +login anonymous +help commandline +quit > "${rootdir}/steamcmd_help.txt"
+./steamcmd.sh +login anonymous +help commandline +quit >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help convars +quit"
 echo "help commandline:" > "${rootdir}/steamcmd_help.txt"
-./steamcmd.sh +login anonymous +help convars +quit > "${rootdir}/steamcmd_help.txt"
+./steamcmd.sh +login anonymous +help convars +quit >> "${rootdir}/steamcmd_help.txt"
 echo "help app_build:" > "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help app_build +quit"
-./steamcmd.sh +login anonymous +help app_build +quit > "${rootdir}/steamcmd_help.txt"
+./steamcmd.sh +login anonymous +help app_build +quit >> "${rootdir}/steamcmd_help.txt"
 echo "help app_update:" > "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help app_update +quit"
-./steamcmd.sh +login anonymous +help app_update +quit > "${rootdir}/steamcmd_help.txt"
+./steamcmd.sh +login anonymous +help app_update +quit >> "${rootdir}/steamcmd_help.txt"
 echo ""
 cat "${rootdir}/steamcmd_help.txt"
 
 echo "Tidy up."
 rm -rf "${rootdir}/tmp"
 rm -rf "${rootdir}/steamcmd"
-
-
-git config --global user.email "me@danielgibbs.co.uk"
-git config --global user.name "dgibbs64"
-
-git remote set-url origin https://dgibbs64:${GH_TOKEN}@github.com/dgibbs64/SteamCMD-Help-List.git
-
-git checkout ${TRAVIS_BRANCH}
-git add . steamcmd_commands.txt
-git update-index --add --chmod=+x push.sh
-git commit -m 'Make push.sh executable'
-git commit --message "Travis build: $(date +%Y-%m-%d)"
-git push --set-upstream origin ${TRAVIS_BRANCH}
