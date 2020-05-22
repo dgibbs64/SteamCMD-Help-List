@@ -26,5 +26,10 @@ jobs:
     - name: steamcmd_help.sh
       run: ./steamcmd_help.sh
       
-    - name: action-push
-      uses: ludeeus/action-push@0.0.1
+    - name: Push to built branch
+      uses: Automattic/action-commit-to-branch@master
+      with:
+        branch: 'master-built'
+        commit_message: 'Build master'
+      env:
+        GITHUB_TOKEN: ${{ secrets.STEAMCMD_HELP_SECRET }} # Required
