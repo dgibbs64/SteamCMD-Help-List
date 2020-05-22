@@ -1,4 +1,4 @@
-# SteamCMD-Help-List
+# SteamCMD Help List
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/61b87c56e64f46a0a29df385dd7e5c60)](https://www.codacy.com/manual/dgibbs64/SteamCMD-Help-List?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dgibbs64/SteamCMD-Help-List&amp;utm_campaign=Badge_Grade)
 [![Generate Output](https://github.com/dgibbs64/SteamCMD-Help-List/workflows/Generate%20Output/badge.svg)](https://github.com/dgibbs64/SteamCMD-Help-List/actions?query=workflow%3A%22Generate+Output%22)
