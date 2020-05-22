@@ -24,3 +24,11 @@ jobs:
     # Runs a single command using the runners shell
     - name: steamcmd_help.sh
       run: ./steamcmd_help.sh
+
+    - name: Push to built branch
+      uses: Automattic/action-commit-to-branch@master
+      with:
+        branch: 'master'
+        commit_message: 'GitHub Actions Build master'
+      env:
+        GITHUB_TOKEN: ${{ secrets.STEAMCMD_HELP_SECRET }} # Required
