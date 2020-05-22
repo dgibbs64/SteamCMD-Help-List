@@ -29,11 +29,11 @@ echo "Getting SteamCMD Help"
 echo "================================="
 cd "${rootdir}/steamcmd"
 
-echo "steamcmd +login anonymous"
+echo "./steamcmd.sh +login anonymous"
 ./steamcmd.sh +login anonymous +quit
 echo "help:" > "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help +quit"
-steamcmd +login anonymous +help +quit > "${rootdir}/steamcmd_help.txt"
+./steamcmd.sh +login anonymous +help +quit > "${rootdir}/steamcmd_help.txt"
 sed -i '1,/Waiting/d' "${rootdir}/steamcmd_help.txt"
 
 echo "help login:" >> "${rootdir}/steamcmd_help_login.txt"
