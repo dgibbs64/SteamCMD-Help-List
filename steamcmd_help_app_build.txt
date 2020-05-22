@@ -1,0 +1,10 @@
+-- Building Steam Applications --
+
+Full documentation of this process is beyond the scope of this little 'help'
+system, and so it is provided as part of the Steam SDK.
+
+If you are a licensed Steam Application Developer, then you will be using
+this tool to 'build' your game or application and create update patches in
+the Steam system. In that case, the 'app_build' command is the one you're
+looking for.
+
