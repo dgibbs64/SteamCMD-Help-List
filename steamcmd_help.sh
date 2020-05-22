@@ -32,31 +32,38 @@ cd "${rootdir}/steamcmd"
 echo "./steamcmd.sh +login anonymous"
 ./steamcmd.sh +login anonymous +quit
 echo "help:" > "${rootdir}/steamcmd_help.txt"
+echo "=================================" >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help +quit"
 ./steamcmd.sh +login anonymous +help +quit >> "${rootdir}/steamcmd_help.txt"
 
 echo "help login:" >> "${rootdir}/steamcmd_help.txt"
+echo "=================================" >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help login +quit"
 ./steamcmd.sh +login anonymous +help login +quit >> "${rootdir}/steamcmd_help.txt"
 
 echo "help scripts:" >> "${rootdir}/steamcmd_help.txt"
+echo "=================================" >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help scripts +quit"
 ./steamcmd.sh +login anonymous +help scripts +quit >> "${rootdir}/steamcmd_help.txt"
 
 echo "help commandline:" >> "${rootdir}/steamcmd_help.txt"
+echo "=================================" >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help commandline +quit"
 ./steamcmd.sh +login anonymous +help commandline +quit >> "${rootdir}/steamcmd_help.txt"
 
 
 echo "help convars:" >> "${rootdir}/steamcmd_help.txt"
+echo "=================================" >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help convars +quit"
 ./steamcmd.sh +login anonymous +help convars +quit >> "${rootdir}/steamcmd_help.txt"
 
 echo "help app_build:" >> "${rootdir}/steamcmd_help.txt"
+echo "=================================" >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help app_build +quit"
 ./steamcmd.sh +login anonymous +help app_build +quit >> "${rootdir}/steamcmd_help.txt"
 
 echo "help app_update:" >> "${rootdir}/steamcmd_help.txt"
+echo "=================================" >> "${rootdir}/steamcmd_help.txt"
 echo "./steamcmd.sh +login anonymous +help app_update +quit"
 ./steamcmd.sh +login anonymous +help app_update +quit >> "${rootdir}/steamcmd_help.txt"
 
