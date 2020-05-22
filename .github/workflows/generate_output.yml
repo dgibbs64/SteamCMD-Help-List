@@ -15,7 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: steamcmd_help.sh
+      
+    - name: Install steamcmd
+      run: sudo apt-get install steamcmd
+      
+    - name: Run steamcmd_help.sh
       run: ./steamcmd_help.sh
 
     - name: Push to built branch
