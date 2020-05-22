@@ -17,7 +17,10 @@ jobs:
     - uses: actions/checkout@v2
       
     - name: Install steamcmd
-      run: sudo apt-get install steamcmd
+      run: |
+        sudo add-apt-repository universe
+        sudo add-apt-repository multiverse
+        sudo apt-get install steamcmd
       
     - name: Run steamcmd_help.sh
       run: ./steamcmd_help.sh
