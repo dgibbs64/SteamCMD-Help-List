@@ -25,3 +25,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: steamcmd_help.sh
       run: ./steamcmd_help.sh
+      
+    - name: action-push
+      uses: ludeeus/action-push@0.0.1
