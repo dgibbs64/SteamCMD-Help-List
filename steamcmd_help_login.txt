@@ -25,4 +25,3 @@ Common commands:
 set_steam_guard_code : Enter the Steam Guard code that was emailed to you
 for authorizing this machine
 
-CWorkThreadPool::~CWorkThreadPool: work processing queue not empty: 2 items discarded.
