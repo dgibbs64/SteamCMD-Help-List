@@ -16,19 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: Install steamcmd
-      run: |
-        sudo add-apt-repository universe
-        sudo add-apt-repository multiverse
-        sudo dpkg --add-architecture i386
-        sudo apt-get update
-        sudo apt-get upgrade -y
-        sudo apt-get install steamcmd
-      
     - name: Run steamcmd_help.sh
       run: ./steamcmd_help.sh
 
-    - name: Push to built branch
+    - name: Push to master branch
       uses: Automattic/action-commit-to-branch@master
       with:
         branch: 'master'
