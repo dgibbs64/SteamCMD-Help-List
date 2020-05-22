@@ -3,3 +3,4 @@ should have each desired command listed sequentially on a new line. The
 filename and extension do not matter; you only need 'read' access to the
 file. Each line of the file will be executed sequentially.
 
+CWorkThreadPool::~CWorkThreadPool: work processing queue not empty: 1 items discarded.
