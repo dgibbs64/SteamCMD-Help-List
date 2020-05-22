@@ -8,3 +8,4 @@ this tool to 'build' your game or application and create update patches in
 the Steam system. In that case, the 'app_build' command is the one you're
 looking for.
 
+CWorkThreadPool::~CWorkThreadPool: work processing queue not empty: 1 items discarded.
