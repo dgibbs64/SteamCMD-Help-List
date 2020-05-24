@@ -32,4 +32,3 @@ Examples:
 
 	steamcmd "+some_command arg1 \"arg with spaces\""
 
-CWorkThreadPool::~CWorkThreadPool: work processing queue not empty: 1 items discarded.
