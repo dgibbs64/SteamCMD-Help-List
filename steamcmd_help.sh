@@ -2,7 +2,7 @@
 # steamcmd_help.sh
 # Author: Daniel Gibbs
 # Website: http://danielgibbs.co.uk
-# Version: 180826
+# Version: 200524
 # Description: Output all of the help details from SteamCMD.
 
 rootdir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
