@@ -1,3 +1,13 @@
+Redirecting stderr to '/home/runner/Steam/logs/stderr.txt'
+[  0%] Checking for available updates...
+[----] Verifying installation...
+Steam Console Client (c) Valve Corporation
+-- type 'quit' to exit --
+Loading Steam API...Warning: failed to init SDL thread priority manager: SDL not found
+OK.
+
+Connecting anonymously to Steam Public...Logged in OK
+Waiting for user info...OK
 -- Logging in to Steam --
 
 Connecting to your Steam account using steamcmd is similar to using the
@@ -25,3 +35,4 @@ Common commands:
 set_steam_guard_code : Enter the Steam Guard code that was emailed to you
 for authorizing this machine
 
+CWorkThreadPool::~CWorkThreadPool: work processing queue not empty: 1 items discarded.

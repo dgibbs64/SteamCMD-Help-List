@@ -32,3 +32,49 @@ Examples:
 
 	steamcmd "+some_command arg1 \"arg with spaces\""
 
+help commandline:
+=================================
+Redirecting stderr to '/home/runner/Steam/logs/stderr.txt'
+[  0%] Checking for available updates...
+[----] Verifying installation...
+Steam Console Client (c) Valve Corporation
+-- type 'quit' to exit --
+Loading Steam API...Warning: failed to init SDL thread priority manager: SDL not found
+OK.
+
+Connecting anonymously to Steam Public...Logged in OK
+Waiting for user info...OK
+-- Directly invoking commands at program execution time using the
+command-line
+
+This can be done using the '+' directive: Any command (including convars)
+which you can type at the Steam> prompt may also be passed in via the
+program command-line after the '+' character.
+
+If the command takes more than one argument, you must wrap the entire
+command (including the '+' character) in quotes. Additionally, if any
+arguments include spaces, they should themselves be wrapped in quotes. In
+the case where outer and inner quotes are necessary, escape the inner qotes
+with the backslash ('\') character.
+
+You can include as many '+' directives on the command-line as you want, they
+will be executed sequentially in order.
+
+Examples:
+
+ * to invoke 'some_command' run:
+
+	steamcmd +some_command
+
+ * to invoke 'some_command arg1' run:
+
+	steamcmd +some_command arg1
+
+ * to invoke 'some_command arg1 arg2' run:
+
+	steamcmd "+some_command arg1 arg2"
+
+ * to invoke 'some_command arg1 "arg with spaces"' run:
+
+	steamcmd "+some_command arg1 \"arg with spaces\""
+

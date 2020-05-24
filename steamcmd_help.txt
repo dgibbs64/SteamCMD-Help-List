@@ -1,3 +1,13 @@
+Redirecting stderr to '/home/runner/Steam/logs/stderr.txt'
+[  0%] Checking for available updates...
+[----] Verifying installation...
+Steam Console Client (c) Valve Corporation
+-- type 'quit' to exit --
+Loading Steam API...Warning: failed to init SDL thread priority manager: SDL not found
+OK.
+
+Connecting anonymously to Steam Public...Logged in OK
+Waiting for user info...OK
 
 Usage:	steamcmd ["+COMMAND [ARG]..."]...
   or:	steamcmd +runscript SCRIPTFILE

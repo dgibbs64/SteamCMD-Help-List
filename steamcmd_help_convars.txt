@@ -9,3 +9,26 @@ To see the current value of a ConVar, simply type its name into the console
 and hit enter. To change the value, type the name of the ConVar followed by
 the desired value, and hit enter.
 
+help convars:
+=================================
+Redirecting stderr to '/home/runner/Steam/logs/stderr.txt'
+[  0%] Checking for available updates...
+[----] Verifying installation...
+Steam Console Client (c) Valve Corporation
+-- type 'quit' to exit --
+Loading Steam API...Warning: failed to init SDL thread priority manager: SDL not found
+OK.
+
+Connecting anonymously to Steam Public...Logged in OK
+Waiting for user info...OK
+-- Console Variables --
+
+ConVars are variables used to set options and program behavior. Often, but
+not always, Steam client ConVars are named beginning with the '@' character.
+The '@' character is simply part of their name, it is not a directive
+itself.
+
+To see the current value of a ConVar, simply type its name into the console
+and hit enter. To change the value, type the name of the ConVar followed by
+the desired value, and hit enter.
+
