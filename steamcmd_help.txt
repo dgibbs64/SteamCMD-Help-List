@@ -1,3 +1,4 @@
+Waiting for user info...OK
 
 Usage:	steamcmd ["+COMMAND [ARG]..."]...
   or:	steamcmd +runscript SCRIPTFILE

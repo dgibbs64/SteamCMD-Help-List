@@ -1,3 +1,4 @@
+Waiting for user info...OK
 -- Building Steam Applications --
 
 Full documentation of this process is beyond the scope of this little 'help'
