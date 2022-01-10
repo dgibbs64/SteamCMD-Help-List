@@ -1,4 +1,3 @@
-Waiting for user info...OK
 -- Downloading and updating Steam applications installed on the local
 machine --
 

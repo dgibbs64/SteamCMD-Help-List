@@ -1,4 +1,3 @@
-Waiting for user info...OK
 You can use the 'runscript' command to execute a text-file script. The file
 should have each desired command listed sequentially on a new line. The
 filename and extension do not matter; you only need 'read' access to the

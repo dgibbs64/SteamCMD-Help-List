@@ -1,4 +1,3 @@
-Waiting for user info...OK
 -- Logging in to Steam --
 
 Connecting to your Steam account using steamcmd is similar to using the
