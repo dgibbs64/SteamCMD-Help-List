@@ -1,3 +1,4 @@
+OK
 
 Usage:	steamcmd ["+COMMAND [ARG]..."]...
   or:	steamcmd +runscript SCRIPTFILE
@@ -14,3 +15,4 @@ Help topics - type "help <topic>" or run with "--help <topic>" for more informat
 
 You can also type "find <string>" to see a list of all commands and convars that contain or reference <string>.
 
+Work thread 'CJobMgr::m_WorkThreadPool:1' is marked exited, but we could not immediately join prior to deleting -- proceeding without join
