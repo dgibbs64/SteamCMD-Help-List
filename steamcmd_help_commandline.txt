@@ -32,3 +32,4 @@ Examples:
 
 	steamcmd "+some_command arg1 \"arg with spaces\""
 
+Work thread 'CJobMgr::m_WorkThreadPool:1' is marked exited, but we could not immediately join prior to deleting -- proceeding without join
