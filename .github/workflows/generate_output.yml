@@ -17,6 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup steamcmd
+        uses: CyberAndrii/setup-steamcmd@v1
+
       - name: Run steamcmd_help.sh
         run: ./steamcmd_help.sh
 
@@ -26,4 +29,4 @@ jobs:
           branch: "master"
           commit_message: "GitHub Actions Build master"
         env:
-          GITHUB_TOKEN: ${{ secrets.STEAMCMD_HELP_SECRET }} # Required
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required
