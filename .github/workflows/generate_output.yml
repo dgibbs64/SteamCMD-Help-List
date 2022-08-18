@@ -1,5 +1,6 @@
-# This workflow generates the output and pushes it to master branch
 ---
+# This workflow generates the output and pushes it to master branch
+
 name: Generate Output
 
 on:
