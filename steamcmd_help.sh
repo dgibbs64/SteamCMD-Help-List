@@ -15,13 +15,13 @@ cd "${rootdir}" || exit
 mkdir -pv "steamcmd"
 cd "steamcmd" || exit
 if [ ! -f "steamcmd.sh" ]; then
-	echo -e "downloading steamcmd_linux.tar.gz...\c"
-	wget -N /dev/null http://media.steampowered.com/client/steamcmd_linux.tar.gz 2>&1 | grep -F HTTP | cut -c45-| uniq
-	tar --verbose -zxf "steamcmd_linux.tar.gz"
-	rm -v "steamcmd_linux.tar.gz"
-	chmod +x "steamcmd.sh"
+  echo -e "downloading steamcmd_linux.tar.gz...\c"
+  wget -N /dev/null http://media.steampowered.com/client/steamcmd_linux.tar.gz 2>&1 | grep -F HTTP | cut -c45- | uniq
+  tar --verbose -zxf "steamcmd_linux.tar.gz"
+  rm -v "steamcmd_linux.tar.gz"
+  chmod +x "steamcmd.sh"
 else
-	echo "Steam already installed!"
+  echo "Steam already installed!"
 fi
 
 echo ""
