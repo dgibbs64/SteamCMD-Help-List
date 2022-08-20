@@ -1,7 +1,7 @@
 Redirecting stderr to '/home/runner/Steam/logs/stderr.txt'
 [  0%] Checking for available updates...
 [----] Verifying installation...
-Steam Console Client (c) Valve Corporation - version 1658944597
+Steam Console Client (c) Valve Corporation - version 1660762488
 -- type 'quit' to exit --
 Loading Steam API...OK
 
