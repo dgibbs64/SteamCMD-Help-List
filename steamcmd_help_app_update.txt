@@ -5,7 +5,8 @@ Steam Console Client (c) Valve Corporation - version 1660762488
 -- type 'quit' to exit --
 Loading Steam API...OK
 
-Connecting anonymously to Steam Public...OK
+Connecting anonymously to Steam Public...Retrying. . . 
+OK
 Waiting for client config...OK
 -- Downloading and updating Steam applications installed on the local
 machine --
