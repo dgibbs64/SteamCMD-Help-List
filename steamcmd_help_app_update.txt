@@ -1,12 +1,11 @@
 Redirecting stderr to '/home/runner/Steam/logs/stderr.txt'
 [  0%] Checking for available updates...
 [----] Verifying installation...
-Steam Console Client (c) Valve Corporation - version 1663887295
+Steam Console Client (c) Valve Corporation - version 1665100882
 -- type 'quit' to exit --
 Loading Steam API...OK
 
-Connecting anonymously to Steam Public...Message type 9806 wasn't declared, but we registered job CClientJobEnableOrDisableDownloads to handle it?
-OK
+Connecting anonymously to Steam Public...OK
 Waiting for client config...OK
 -- Downloading and updating Steam applications installed on the local
 machine --
