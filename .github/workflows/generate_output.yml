@@ -13,18 +13,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Setup steamcmd
-        uses: CyberAndrii/setup-steamcmd@v1
+      - name: Setup SteamCMD
+        uses: CyberAndrii/setup-steamcmd@v1.1.4
 
       - name: Run steamcmd_help.sh
         run: ./steamcmd_help.sh
 
-      - name: Push to main branch
-        uses: Automattic/action-commit-to-branch@main
+      - name: Commit files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update SteamCMD output" -a
+
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
         with:
-          branch: "main"
+          branch: ${{ github.ref }}
           commit_message: "GitHub Actions Build main"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required
+          github_token: ${{ secrets.GITHUB_TOKEN }}
