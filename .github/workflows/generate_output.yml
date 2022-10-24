@@ -1,5 +1,5 @@
 ---
-# This workflow generates the output and pushes it to master branch
+# This workflow generates the output and pushes it to main branch
 
 name: Generate Output
 
@@ -7,7 +7,7 @@ on:
   schedule:
     - cron: "0 0 * * *"
   push:
-    branches: ["main", "master"]
+    branches: ["main"]
 
 jobs:
   build:
@@ -21,10 +21,10 @@ jobs:
       - name: Run steamcmd_help.sh
         run: ./steamcmd_help.sh
 
-      - name: Push to master branch
-        uses: Automattic/action-commit-to-branch@master
+      - name: Push to main branch
+        uses: Automattic/action-commit-to-branch@main
         with:
-          branch: "master"
-          commit_message: "GitHub Actions Build master"
+          branch: "main"
+          commit_message: "GitHub Actions Build main"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required
