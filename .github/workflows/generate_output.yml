@@ -22,10 +22,10 @@ jobs:
       - name: Run steamcmd_help.sh
         run: ./steamcmd_help.sh
 
-      - name: Push to ${{ github.ref }} branch
+      - name: Push to main branch
         uses: Automattic/action-commit-to-branch@master
         with:
-          branch: "${{ github.ref }}"
+          branch: "main"
           commit_message: "GitHub Actions build: $(date --rfc-3339=date)"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
