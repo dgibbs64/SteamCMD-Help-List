@@ -26,7 +26,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Update SteamCMD output" -a
+          git commit -m "GitHub Actions build: $(date --rfc-3339=date)" -a
 
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
