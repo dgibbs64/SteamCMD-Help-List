@@ -23,7 +23,7 @@ jobs:
         run: ./steamcmd_help.sh
 
       - name: Push to ${{ github.ref }} branch
-        uses: Automattic/action-commit-to-branch@main
+        uses: Automattic/action-commit-to-branch@master
         with:
           branch: "${{ github.ref }}"
           commit_message: "GitHub Actions build: $(date --rfc-3339=date)"
