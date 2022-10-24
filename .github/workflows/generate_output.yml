@@ -22,10 +22,14 @@ jobs:
       - name: Run steamcmd_help.sh
         run: ./steamcmd_help.sh
 
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
       - name: Push to main branch
         uses: Automattic/action-commit-to-branch@master
         with:
           branch: "main"
-          commit_message: "GitHub Actions build: $(date --rfc-3339=date)"
+          commit_message: "GitHub Actions build: ${{ steps.date.outputs.date }}"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
