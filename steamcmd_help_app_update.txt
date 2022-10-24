@@ -1,12 +1,3 @@
-Redirecting stderr to '/home/runner/Steam/logs/stderr.txt'
-[  0%] Checking for available updates...
-[----] Verifying installation...
-Steam Console Client (c) Valve Corporation - version 1666144101
--- type 'quit' to exit --
-Loading Steam API...OK
-
-Connecting anonymously to Steam Public...OK
-Waiting for client config...OK
 -- Downloading and updating Steam applications installed on the local
 machine --
 
