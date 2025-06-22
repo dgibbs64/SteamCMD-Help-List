@@ -14,5 +14,4 @@ Help topics - type "help <topic>" or run with "--help <topic>" for more informat
 
 You can also type "find <string>" to see a list of all commands and convars that contain or reference <string>.
 
-Unloading Steam API...OK
 
