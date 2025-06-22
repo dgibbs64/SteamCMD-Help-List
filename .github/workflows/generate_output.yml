@@ -33,3 +33,11 @@ jobs:
           commit_message: "GitHub Actions build: ${{ steps.date.outputs.date }}"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+  workflow-keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: liskin/gh-workflow-keepalive@v1
