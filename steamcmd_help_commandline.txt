@@ -32,5 +32,4 @@ Examples:
 
 	steamcmd "+some_command arg1 \"arg with spaces\""
 
-Unloading Steam API...OK
 

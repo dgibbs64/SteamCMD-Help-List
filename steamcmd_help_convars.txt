@@ -9,5 +9,4 @@ To see the current value of a ConVar, simply type its name into the console
 and hit enter. To change the value, type the name of the ConVar followed by
 the desired value, and hit enter.
 
-Unloading Steam API...OK
 

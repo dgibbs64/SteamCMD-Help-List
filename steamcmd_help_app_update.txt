@@ -29,5 +29,4 @@ It's likely you'll want to put all of the necessary calls into a script file
  quit
 
 
-Unloading Steam API...OK
 
