@@ -18,15 +18,15 @@ A daily-updated copy of the built-in help output from [SteamCMD](https://develop
 
 ## Help topics
 
-| File                                                           | Command             | Description                                                      |
-| -------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------- |
-| [steamcmd_help.txt](steamcmd_help.txt)                         | `+help`             | Usage and list of help topics                                    |
-| [steamcmd_help_login.txt](steamcmd_help_login.txt)             | `+help login`       | Logging in to Steam                                              |
-| [steamcmd_help_scripts.txt](steamcmd_help_scripts.txt)         | `+help scripts`     | Executing a sequence of commands via a script file               |
-| [steamcmd_help_commandline.txt](steamcmd_help_commandline.txt) | `+help commandline` | Executing commands directly via the OS command line              |
-| [steamcmd_help_convars.txt](steamcmd_help_convars.txt)         | `+help convars`     | Options and settings that affect this program session            |
-| [steamcmd_help_app_build.txt](steamcmd_help_app_build.txt)     | `+help app_build`   | Building Steam application content (licensed developers only)    |
-| [steamcmd_help_app_update.txt](steamcmd_help_app_update.txt)   | `+help app_update`  | Installing/updating a Steam application (e.g. dedicated servers) |
+| File                                                           | Command               | Description                                                      |
+| -------------------------------------------------------------- | --------------------- | ---------------------------------------------------------------- |
+| [steamcmd_help.txt](steamcmd_help.txt)                         | `+help`               | Usage and list of help topics                                    |
+| [steamcmd_help_login.txt](steamcmd_help_login.txt)             | `+help login`         | Logging in to Steam                                              |
+| [steamcmd_help_scripts.txt](steamcmd_help_scripts.txt)         | `+help scripts`       | Executing a sequence of commands via a script file               |
+| [steamcmd_help_commandline.txt](steamcmd_help_commandline.txt) | `+help commandline`   | Executing commands directly via the OS command line              |
+| [steamcmd_help_convars.txt](steamcmd_help_convars.txt)         | `+help convars`       | Options and settings that affect this program session            |
+| [steamcmd_help_app_build.txt](steamcmd_help_app_build.txt)     | `+help app_build`     | Building Steam application content (licensed developers only)    |
+| [steamcmd_help_app_update.txt](steamcmd_help_app_update.txt)   | `+help app_update`    | Installing/updating a Steam application (e.g. dedicated servers) |
 | [steamcmd_find_all.txt](steamcmd_find_all.txt)                 | `+find a` … `+find z` | Every command and convar SteamCMD knows about                    |
 
 ## Usage
