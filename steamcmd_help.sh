@@ -32,49 +32,24 @@ run_steamcmd() {
   fi
 }
 
-# merge_find_output <file>
-# Merge the ConVars/Commands sections from several "find" calls into one
-# de-duplicated list, sorted by name. Lines that are not "name = value : desc"
-# or "name : desc" entries (e.g. wrapped description text) are dropped.
-merge_find_output() {
-  local file="${1}"
-  awk '
-    /^ConVars:$/ { section = 1; next }
-    /^Commands:$/ { section = 2; next }
-    section && match($0, /^ *[^ =:]+ +(= "|:( |$))/) {
-      name = $1
-      if (!seen[section, name]++) {
-        print section "\t" name "\t" $0
-      }
-    }
-  ' "${file}" \
-    | sort -t "$(printf '\t')" -k1,1n -k2,2 \
-    | awk -F '\t' '
-      $1 != last { print (NR > 1 ? "\n" : "") ($1 == 1 ? "ConVars:" : "Commands:"); last = $1 }
-      { sub(/^[^\t]*\t[^\t]*\t/, ""); print }
-    ' > "${file}.tmp"
-  mv "${file}.tmp" "${file}"
-}
-
 echo ""
 echo "Getting SteamCMD Help"
 echo "================================="
+
+# Record the SteamCMD version from its startup banner, e.g.
+# "Steam Console Client (c) Valve Corporation - version 1788292693".
+version="$({ steamcmd +quit || true; } | sed -nE '/Steam Console Client/{s/.* version ([0-9]+).*/\1/p;q}')"
+if [ -n "${version}" ]; then
+  echo "SteamCMD version: ${version}"
+  echo "${version}" > "${rootdir}/steamcmd_version.txt"
+else
+  echo "Warning: could not detect SteamCMD version" >&2
+fi
 
 run_steamcmd "steamcmd_help.txt" +help
 for topic in login scripts commandline convars app_build app_update; do
   run_steamcmd "steamcmd_help_${topic}.txt" "+help ${topic}"
 done
-
-# Full list of all commands and convars. "find" matches a substring of the
-# name or description and has no wildcard, so search for every letter.
-find_args=()
-for letter in {a..z}; do
-  find_args+=("+find ${letter}")
-done
-run_steamcmd "steamcmd_find_all.txt" "${find_args[@]}"
-merge_find_output "${rootdir}/steamcmd_find_all.txt"
-echo ""
-echo "steamcmd_find_all.txt: $(grep -c . "${rootdir}/steamcmd_find_all.txt") lines after merge"
 
 echo ""
 echo "tidy up"

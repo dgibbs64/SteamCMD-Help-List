@@ -14,20 +14,27 @@
 
 ## Description
 
-A daily-updated copy of the built-in help output from [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD), Valve's command-line Steam client. A GitHub Actions workflow runs SteamCMD every day and commits any changes, so the commit history also shows when Valve changes the help text.
+A daily-updated copy of the built-in help output from [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD), Valve's command-line Steam client. A GitHub Actions workflow runs SteamCMD every day and commits any changes, so you can see when Valve changes the help text.
+
+Looking for every SteamCMD command and convar? See [SteamCMD Commands List](https://github.com/dgibbs64/SteamCMD-Commands-List).
 
 ## Help topics
 
-| File                                                           | Command               | Description                                                      |
-| -------------------------------------------------------------- | --------------------- | ---------------------------------------------------------------- |
-| [steamcmd_help.txt](steamcmd_help.txt)                         | `+help`               | Usage and list of help topics                                    |
-| [steamcmd_help_login.txt](steamcmd_help_login.txt)             | `+help login`         | Logging in to Steam                                              |
-| [steamcmd_help_scripts.txt](steamcmd_help_scripts.txt)         | `+help scripts`       | Executing a sequence of commands via a script file               |
-| [steamcmd_help_commandline.txt](steamcmd_help_commandline.txt) | `+help commandline`   | Executing commands directly via the OS command line              |
-| [steamcmd_help_convars.txt](steamcmd_help_convars.txt)         | `+help convars`       | Options and settings that affect this program session            |
-| [steamcmd_help_app_build.txt](steamcmd_help_app_build.txt)     | `+help app_build`     | Building Steam application content (licensed developers only)    |
-| [steamcmd_help_app_update.txt](steamcmd_help_app_update.txt)   | `+help app_update`    | Installing/updating a Steam application (e.g. dedicated servers) |
-| [steamcmd_find_all.txt](steamcmd_find_all.txt)                 | `+find a` … `+find z` | Every command and convar SteamCMD knows about                    |
+| File                                                           | Command             | Description                                                      |
+| -------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------- |
+| [steamcmd_help.txt](steamcmd_help.txt)                         | `+help`             | Usage and list of help topics                                    |
+| [steamcmd_help_login.txt](steamcmd_help_login.txt)             | `+help login`       | Logging in to Steam                                              |
+| [steamcmd_help_scripts.txt](steamcmd_help_scripts.txt)         | `+help scripts`     | Executing a sequence of commands via a script file               |
+| [steamcmd_help_commandline.txt](steamcmd_help_commandline.txt) | `+help commandline` | Executing commands directly via the OS command line              |
+| [steamcmd_help_convars.txt](steamcmd_help_convars.txt)         | `+help convars`     | Options and settings that affect this program session            |
+| [steamcmd_help_app_build.txt](steamcmd_help_app_build.txt)     | `+help app_build`   | Building Steam application content (licensed developers only)    |
+| [steamcmd_help_app_update.txt](steamcmd_help_app_update.txt)   | `+help app_update`  | Installing/updating a Steam application (e.g. dedicated servers) |
+
+## Tracking changes
+
+- [CHANGELOG.md](CHANGELOG.md) lists each day the output changed, which files changed and the SteamCMD version.
+- [steamcmd_version.txt](steamcmd_version.txt) holds the SteamCMD version the files were generated with.
+- To be notified, watch the repo or subscribe to the [commits feed](https://github.com/dgibbs64/SteamCMD-Help-List/commits/main.atom).
 
 ## Usage
 
