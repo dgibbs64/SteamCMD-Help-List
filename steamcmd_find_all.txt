@@ -1,0 +1,88 @@
+ConVars:
+nClientBackgroundAutoUpdateRecentlyPlayedThresholdHours = "72"         : If you've played the game more recently than this, we'll schedule the background update sooner.
+nClientBackgroundAutoUpdateTimeSpreadMinutes = "360"        : Spread of time around the above target hour - this is the +/- 2-sigma window, so half this on either side.
+   nClientBackgroundAutoUpdateTargetHour = "4"          : Target hour, in local time, for auto-scheduled app updates. Will be spread around this point via the convar below.
+nClientBackgroundAutoUpdateLessRecentlyPlayedThresholdHours = "720"        : If you've played the game more recently than this, we'll schedule the background update sooner.
+nClientBackgroundAutoUpdateNotPlayedTimeSpreadDays = "14"         : If the user hasn't played this game in a while, pick a morning up to this many days out to update.
+                sDepotDownloadFileFilter = ""           : only download matching files, eg *.exe;*.dll
+                         controller_rate = "2000"       : SteamInput Active Polling interval in microseconds. Default 2000us = 500hz
+           controller_idle_poll_interval = "50000"      : SteamInput Idle Polling interval in microseconds. Default 50,000us = 20hz
+    force_software_gyro_drift_correction = "0"          : 0: Only use software drift calibration based on controller capabilities. 1: Any controllers with IMUs will be forced to use the standard software drift calibration.
+               triton_imu_sensortime_log = "0"          : Spew the triton IMU sensor timings to console.
+           gyro_drift_correction_enabled = "1"          : Turn on/off software gyro anti-drift correction.
+    gyro_calibration_duration_stationary = "5.0"        : Duration in second of gyro noise tolerance calibration.
+        gyro_calibration_duration_manual = "5.0"        : Duration in second of manual gyro drift calibration. Longer durations make for more accurate drift corrections.
+gyro_calibration_duration_manual_timeout = "30.0"       : Duration before manual gyro drift calibration times out, and returns to calibrating the noise tolerance.
+     gyro_calibration_duration_automatic = "5.0"        : Duration in seconds required to calibrate gyro drift outside of manual calibration. Warning: Short calibration times are more likely to result in false positive anti-drift solutions.
+       gyro_stationary_calibration_debug = "0"          : Display which sensor readings (accelerometer or gyroscope) are restarting the tolerance calibration due to their noise being too large.
+            gyro_drift_calibration_debug = "0"          : Display which sensor readings (accelerometer or gyroscope) are restarting the drift calibration due to their noise being bigger than noise tolerance.
+           gyro_drift_detection_duration = "30.0"       : How long we sample for before triggering a calibration warning. Seconds.
+     gyro_drift_detection_min_drift_rate = "0.1"        : The minimum degrees per second we consider to be gyro drift. i.e. if we notice the gyroscope has drifted at higher than this rate, it could be drifting noticeably.
+     gyro_drift_detection_min_deflection = "270.0"      : The minimum degrees of deflection we must have turned through to detect a drift event. This intentionally higher than rotations we'd expect from regular use.
+              gyro_drift_detection_debug = "0"          : Spew information about how far the gyro has deflected over time.
+                     gyro_filter_enabled = "1"          : Enable (Pseudo) One Euro Filter to internal gyro quaternion. This reduces low level sensor noise and hand shake. 
+                   gyro_filter_min_speed = "2"          : Below this gyro rotation speed (degrees/second) we apply max smoothing (low pass filter).
+                   gyro_filter_max_speed = "16.0"       : Above this gyro rotation speed (degrees/second) we apply min (zero) smoothing.
+                  gyro_filter_smoothness = "75"         : Smoothing amount for low pass filter. 1 is TOO smoothed (barely responding). 100 is barely smoothed.
+               controller_jerk_threshold = "500"        : The amount of Gyro Jerk (gyro change per second) required to create a Controller Jerk count. Note, only available on SteamDeck/Neptune/Galileo
+    controller_jerk_low_pass_filter_rate = "4"          : How quickly the low pass filter chases the raw gyro jerk value.
+                controller_jerk_throttle = "2"          : (Hz) The maximum callback rate for Controller Jerk Events.
+                  gyro_force_sensor_rate = "0"          : If zero, cull suspected bad sensor data (can result in a loss of natural sensitivity). If not zero, ignore IMU sensor timing and use fixed rate instead. Measured in HZ. Common values: 250hz (PS5), 250hz (PS4), 200hz (Nintendo Switch)
+           gyro_auto_detect_polling_rate = "1"          : Wired Connections only. 0: Legacy Mode. Known to be buggy with Blitz 2 and other controllers set to 1000hz+. 1: If SDL3 sensor delta time is zero, or unexpected sensor timings are detected, fall back on packet-rate based estimation of polling rate (if outside a margin of error: gyro_sensor_margin_of_error_pct). 2: Exclusively use packet-rate based estimation of polling rate.
+         gyro_sensor_margin_of_error_pct = "25"         : If gyro_auto_detect_polling_rate is set to mode 2, use this +/- X% value as the acceptable margin of error before falling back on packet-rate based estimation of polling rate.
+         gyro_force_handheld_orientation = "0"          : 0: Auto. 1: Force Controller to be "HandHeld" orientation, like SteamDeck (tilt in pitch by 90 degrees so that "Yaw" is "Through the Screen". 2: Force Controller to be "Standalone" controller like Steam Controller, where "Yaw" is "Through Sticks". 
+              gyro_handheld_pitch_offset = "90"         : When in handheld mode, how far we tilt the gyro quaternion before processing. This affects only the "Gyro to Mouse" and "Gyro to JoystickCamera" modes. And only affects Yaw, Roll, Yaw + Roll, and Laser Pointer 3DOF to 2D conversion styles within those modes. Player Space and World Space are controller affordance agnostic.
+gyro_debug_gyro_speed_vs_quaternion_speed = "0"          : 0: Off. 1: Spew the gyro speed and the extracted quaternion rotation speed
+        gyro_debug_hardware_vs_mode_time = "0"          : 0: Off. 1: Spew the hardware delta time vs. the platform delta time.
+               gyro_haptic_probe_enabled = "0"          : 0: Off. 1: Try new gyro mode. Config must have haptic level set to something other than "off
+
+          gyro_haptic_probe_offset_scale = "0.65"       : How far to spread the haptic probe set is spread out. 0 = ontop of each other. 1 = 1 degree separation.
+             gyro_haptic_probe_min_speed = "0.125"      : Lowest speed for haptic probe movement. Degrees per second.
+             gyro_haptic_probe_max_speed = "360.0"      : Highest speed for haptic probe movement. Degrees per second.
+                 gyro_haptic_probe_types = "3"          : 0: None. 1: Trackpad Only. 2: Rumble Only. 3: Both
+             gyro_to_joystick_camera_raw = "1"          : Used to test old Gyro to joystick Camera processing pipeline (1) against old (0).
+           gyro_to_joystick_camera_relax = "0"          : Low pass filter on the output to help lower FPS games. Needs more thought.
+                       gyro_raw_deadzone = "6.0"        : Legacy deadzoning for gyro signal. Only affects "As Mouse" and its derivative modes.
+             gyro_speed_deadzone_enabled = "1"          : Enable the minimum speed required to update the gyroscope response.
+            gyro_precision_speed_enabled = "1"          : Enable linear response multiplier to speeds below the value set in the "Gyro To..." modes. This applies itself to the remaining speed after the gyro speed deadzone has been applied.
+                 gyro_prediction_enabled = "1"          : Enable extrapolation of rotation using the last known gyro speed. This is important to avoid staggered signals over blue tooth, but generally upgrades gyros that run lower than 500hz. The extrapolated quaternion will correct back toward the "ground truth" quaternion when the speed exceeds.
+    gyro_prediction_correction_speed_min = "30.0"       : Below this speed (degrees per second) there is no correction of the predicted quaternion toward the  "ground truth" quaternion.
+    gyro_prediction_correction_speed_max = "180.0"      : Above this speed (degrees per second) there is full correction of the predicted quaternion toward the  "ground truth" quaternion. Note this will still be gradual correction, and only in the shared direction of user rotation and the correction required.
+    gyro_use_polling_time_for_prediction = "1"          : Use the main loop's cached time as opposed to a fresh sample. Just for A/B testing.
+                   @uDownloadLANPeerPort = "27038"      : If LAN p2p download enabled, will listen on this port for TCP connections from peers. Must be set consistently across all members of the group!
+          @sTrustedLocalContentCacheName = ""           : Set this to the machine name where a trusted local Steam download cache is hosted, and we'll use it if available.
+@nClientDownloadInitWindowSizeHTTP2Stream = "4000000"    : Init per-stream window size for HTTP/2.
+@nClientDownloadInitWindowSizeHTTP2Connection = "32000000"   : Init per-connection window size for HTTP/2.
+            @sSiteLicenseProxyExplicitIP = ""           : Local content cache: if not blank, will instruct clients to go to this IP for the content cache.
+@bSiteLicenseProxyCacheIsExternalProcess = "0"          : If set, the caching content proxy will be handled by some process other than steamcmd. You probably also should set @sSiteLicenseProxyExplicitIP.
+       @nClientInitWindowSizeHTTP2Stream = "2000000"    : Init per-stream window size for HTTP/2.
+   @nClientInitWindowSizeHTTP2Connection = "10000000"   : Init per-connection window size for HTTP/2.
+             @nBootReserveRetryPeriodSec = "30"         : Number of seconds to wait before retrying after failing to create a boot reserve file. Should be a multiple of 10.
+              @csecDurationControlPeriod = ""           : Override default duration-control / anti-indulgence time period. If nonzero, initial playtime threshold is this value in seconds
+         @csecDurationControlPeriodToday = ""           : Override default duration-control / anti-indulgence time period. If nonzero, per-day playtime threshold is this value in seconds
+           @csecDurationControlSimulated = ""           : Simulate having already played this many seconds of playtime.
+  @csecDurationControlSimulatedNonRecent = ""           : Simulate having already played this many seconds of playtime today, but not recently.
+              @durationControlNightCheck = "1"          : Time of day check for duration-control feature. 1 = normal. 2 = force night-time. 0 = disable checks, only enabled for age verified accounts
+       @test_nCloudForceSyncFailureAppID = "0"          : Set this to a non-zero App ID to test cloud sync failure. The next sync request will fail.
+        @bEnableFrameFuncOverageWarnings = "0"          : This turns on the spew in SPEW_MISC at level 4, still need to adjust spew levels to see it.
+     @bHttpClientRecordHostnameDimension = "0"          : Group HTTP metrics by hostname.  Careful, the cardinality of your in-memory map might be large.
+          @nHTTPServerLogLevelDetails200 = "4"          : Log level to use for full details of any http server request returning 200.  This will probably fill up the log if you leave it on.
+                @bHTTPServerHTTP2Enabled = "0"          : Global default for whether CHTTPServer advertises/accepts HTTP/2 (over TLS via ALPN). A server that calls SetHTTP2Enabled() explicitly overrides this value.
+@nHTTPServerHTTP2InitWindowSizePerStream = "1048576"    : Default HTTP/2 per-stream flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerStream().
+@nHTTPServerHTTP2InitWindowSizePerConnection = "3145728"    : Default HTTP/2 per-connection flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerConnection().
+   @nHTTPServerHTTP2MaxConcurrentStreams = "25"         : Default maximum concurrent HTTP/2 streams advertised per CHTTPServer connection. Overridden per-server by SetHTTP2MaxConcurrentStreamsPerConnection().
+                        @bMetricsEnabled = "1"          : Enabling allows jobs to collect and report metrics through IMetricsReporters.
+              @metricsDisabledOperations = ""           : Comma separated list of metrics operations that are disabled.  This setting has highest priority
+               @metricsEnabledOperations = ""           : Comma separated list of metrics operations.  Overrides disabled catalogs
+                @metricsDisabledCatalogs = ""           : Comma separated list of metrics catalogs to disable.  This is the last check.
+            @nCallerDeadlineHopLatencyMS = "10"         : When we send a message expecting a reply from a job with a deadline, set the timeout on the message to [current time remaining in this job] - N ms.  A negative value prevents propagating caller deadlines down the chain
+        @bEnableFrameFuncOverageWarnings = "0"          : This turns on the spew in SPEW_MISC at level 4, still need to adjust spew levels to see it.
+Commands:
+                             app_info_find : Find apps with a certain appinfo value set, eg 'common/type media'. * is any. 
+                            app_set_config : <AppID> <key> <value> - sets a config value for given app.
+                                   log_ipc : usage: "log_ipc [counts|verbose|#maxcount] <filter>" Enables IPC logging. Specifying "counts" or "verbose" is optional, defaulting to counts.
+                                  p2p_info : usage: "p2p_info" Displays the current state of the P2P networking subsystem.
+                         clear_credentials : Clear cached credentials for current user. The next login will require authentication including an email or mobile confirmation.
+                        app_install_script : <AppID> [uninstall:0|1]- Runs app install script.
+                       app_license_request : <AppID> - Requests a free licenses for this app if not already owned.
+                          app_info_request : <AppID> - Issue an appinfo request for the given appid. Does not wait for results from the server.
