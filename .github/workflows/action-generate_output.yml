@@ -12,6 +12,7 @@ on:
   pull_request:
     paths:
       - "steamcmd_help.sh"
+      - ".github/scripts/summarise_changes.sh"
       - ".github/workflows/action-generate_output.yml"
 
 permissions:
@@ -30,19 +31,16 @@ jobs:
       - name: Run steamcmd_help.sh
         run: ./steamcmd_help.sh
 
-      - name: Show changes
-        run: git status --short && git diff --stat
-
-      - name: Get current date
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+      - name: Summarise changes
+        id: changes
+        run: .github/scripts/summarise_changes.sh
 
       - name: Add and commit changes
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && steps.changes.outputs.message != ''
         uses: EndBug/add-and-commit@v11
         with:
           fetch: false
-          message: "GitHub Actions build: ${{ steps.date.outputs.date }}"
+          message: ${{ steps.changes.outputs.message }}
           push: true
 
   # Scheduled workflows are disabled after 60 days without repo activity,
