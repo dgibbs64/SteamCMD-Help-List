@@ -1,51 +1,49 @@
 #!/bin/bash
 # steamcmd_help.sh
 # Author: Daniel Gibbs
-# Website: http://danielgibbs.co.uk
-# Version: 200524
+# Website: https://danielgibbs.co.uk
 # Description: Output all of the help details from SteamCMD.
 
+set -euo pipefail
+
 rootdir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+
+# Strip SteamCMD startup noise and ANSI escape codes from the output.
+clean_output() {
+  sed '1,/Waiting for client config/d' \
+    | sed -E 's/\x1b\[[0-9;]*m//g; s/\[[0-9;]*m//g' \
+    | grep -vE '^OK$|Waiting for user info|Unloading Steam API|CWorkThreadPool|workthreadpool\.cpp|CProcessWorkItem|CHTTPClientThreadPool' \
+    || true
+}
+
+# run_steamcmd <output file> <steamcmd args...>
+run_steamcmd() {
+  local outfile="${rootdir}/${1}"
+  shift
+  echo ""
+  echo "steamcmd +login anonymous $* +quit"
+  echo "================================="
+  # SteamCMD exit codes are unreliable, so check the output instead.
+  { steamcmd +login anonymous "$@" +quit || true; } | clean_output > "${outfile}"
+  cat "${outfile}"
+  if [ ! -s "${outfile}" ]; then
+    echo "Error: ${outfile} is empty" >&2
+    exit 1
+  fi
+}
 
 echo ""
 echo "Getting SteamCMD Help"
 echo "================================="
-echo ""
-echo "steamcmd +login anonymous +help +quit"
-echo "================================="
-steamcmd +login anonymous +help +quit | grep -v "Waiting for user info" | grep -v "Unloading Steam API" | tee "${rootdir}/steamcmd_help.txt"
-sed -i '1,/Waiting/d; s/\x1b//g; s/\[0m//g; s/\[1m//g; /CWorkThreadPool/d; /workthreadpool.cpp/d; /CProcessWorkItem/d; /CHTTPClientThreadPool/d' "${rootdir}/steamcmd_help.txt"
-echo ""
-echo "steamcmd +login anonymous +help login +quit"
-echo "================================="
-steamcmd +login anonymous +help login +quit | grep -v "Waiting for user info" | grep -v "Unloading Steam API" | tee "${rootdir}/steamcmd_help_login.txt"
-sed -i '1,/Waiting/d; s/\x1b//g; s/\[0m//g; s/\[1m//g; /CWorkThreadPool/d; /workthreadpool.cpp/d; /CProcessWorkItem/d; /CHTTPClientThreadPool/d' "${rootdir}/steamcmd_help_login.txt"
-echo ""
-echo "steamcmd +login anonymous +help scripts +quit"
-echo "================================="
-steamcmd +login anonymous +help scripts +quit | grep -v "Waiting for user info" | grep -v "Unloading Steam API" | tee "${rootdir}/steamcmd_help_scripts.txt"
-sed -i '1,/Waiting/d; s/\x1b//g; s/\[0m//g; s/\[1m//g; /CWorkThreadPool/d; /workthreadpool.cpp/d; /CProcessWorkItem/d; /CHTTPClientThreadPool/d' "${rootdir}/steamcmd_help_scripts.txt"
-echo ""
-echo "steamcmd +login anonymous +help commandline +quit"
-echo "================================="
-steamcmd +login anonymous +help commandline +quit | grep -v "Waiting for user info" | grep -v "Unloading Steam API" | tee "${rootdir}/steamcmd_help_commandline.txt"
-sed -i '1,/Waiting/d; s/\x1b//g; s/\[0m//g; s/\[1m//g; /CWorkThreadPool/d; /workthreadpool.cpp/d; /CProcessWorkItem/d; /CHTTPClientThreadPool/d' "${rootdir}/steamcmd_help_commandline.txt"
-echo ""
-echo "steamcmd +login anonymous +help convars +quit"
-echo "================================="
-steamcmd +login anonymous +help convars +quit | grep -v "Waiting for user info" | grep -v "Unloading Steam API" | tee "${rootdir}/steamcmd_help_convars.txt"
-sed -i '1,/Waiting/d; s/\x1b//g; s/\[0m//g; s/\[1m//g; /CWorkThreadPool/d; /workthreadpool.cpp/d; /CProcessWorkItem/d; /CHTTPClientThreadPool/d' "${rootdir}/steamcmd_help_convars.txt"
-echo ""
-echo "steamcmd +login anonymous +help app_build +quit"
-echo "================================="
-steamcmd +login anonymous +help app_build +quit | grep -v "Waiting for user info" | grep -v "Unloading Steam API" | tee "${rootdir}/steamcmd_help_app_build.txt"
-sed -i '1,/Waiting/d; s/\x1b//g; s/\[0m//g; s/\[1m//g; /CWorkThreadPool/d; /workthreadpool.cpp/d; /CProcessWorkItem/d; /CHTTPClientThreadPool/d' "${rootdir}/steamcmd_help_app_build.txt"
-echo ""
-echo "steamcmd +login anonymous +help app_update +quit"
-echo "================================="
-steamcmd +login anonymous +help app_update +quit | grep -v "Waiting for user info" | grep -v "Unloading Steam API" | tee "${rootdir}/steamcmd_help_app_update.txt"
-sed -i '1,/Waiting/d; s/\x1b//g; s/\[0m//g; s/\[1m//g; /CWorkThreadPool/d; /workthreadpool.cpp/d; /CProcessWorkItem/d; /CHTTPClientThreadPool/d' "${rootdir}/steamcmd_help_app_update.txt"
+
+run_steamcmd "steamcmd_help.txt" +help
+for topic in login scripts commandline convars app_build app_update; do
+  run_steamcmd "steamcmd_help_${topic}.txt" "+help ${topic}"
+done
+
+# Full list of all commands and convars.
+run_steamcmd "steamcmd_find_all.txt" "+find ."
+
 echo ""
 echo "tidy up"
-rm -rf "${rootdir}/tmp"
-rm -rf "${rootdir}/steamcmd"
+rm -rf "${rootdir}/tmp" "${rootdir}/steamcmd"
