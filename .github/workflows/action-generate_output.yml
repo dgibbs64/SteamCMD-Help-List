@@ -4,10 +4,18 @@
 name: Generate Output
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
   push:
     branches: ["main"]
+  pull_request:
+    paths:
+      - "steamcmd_help.sh"
+      - ".github/workflows/action-generate_output.yml"
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -22,18 +30,27 @@ jobs:
       - name: Run steamcmd_help.sh
         run: ./steamcmd_help.sh
 
+      - name: Show changes
+        run: git status --short && git diff --stat
+
       - name: Get current date
         id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
 
       - name: Add and commit changes
+        if: github.event_name != 'pull_request'
         uses: EndBug/add-and-commit@v9
         with:
           fetch: false
           message: "GitHub Actions build: ${{ steps.date.outputs.date }}"
           push: true
 
-      - name: Sleep for 10s
-        uses: juliangruber/sleep-action@v2
-        with:
-          time: 10s
+  # Scheduled workflows are disabled after 60 days without repo activity,
+  # and this one only commits when the SteamCMD output changes.
+  workflow-keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: liskin/gh-workflow-keepalive@v1
