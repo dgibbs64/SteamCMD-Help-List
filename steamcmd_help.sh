@@ -10,26 +10,26 @@ rootdir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 # Strip SteamCMD startup noise and ANSI escape codes from the output.
 clean_output() {
-	sed '1,/Waiting for client config/d' \
-		| sed -E 's/\x1b\[[0-9;]*m//g; s/\[[0-9;]*m//g' \
-		| grep -vE '^OK$|Waiting for user info|Unloading Steam API|CWorkThreadPool|workthreadpool\.cpp|CProcessWorkItem|CHTTPClientThreadPool' \
-		|| true
+  sed '1,/Waiting for client config/d' \
+    | sed -E 's/\x1b\[[0-9;]*m//g; s/\[[0-9;]*m//g' \
+    | grep -vE '^OK$|Waiting for user info|Unloading Steam API|CWorkThreadPool|workthreadpool\.cpp|CProcessWorkItem|CHTTPClientThreadPool' \
+    || true
 }
 
 # run_steamcmd <output file> <steamcmd args...>
 run_steamcmd() {
-	local outfile="${rootdir}/${1}"
-	shift
-	echo ""
-	echo "steamcmd +login anonymous $* +quit"
-	echo "================================="
-	# SteamCMD exit codes are unreliable, so check the output instead.
-	{ steamcmd +login anonymous "$@" +quit || true; } | clean_output > "${outfile}"
-	cat "${outfile}"
-	if [ ! -s "${outfile}" ]; then
-		echo "Error: ${outfile} is empty" >&2
-		exit 1
-	fi
+  local outfile="${rootdir}/${1}"
+  shift
+  echo ""
+  echo "steamcmd +login anonymous $* +quit"
+  echo "================================="
+  # SteamCMD exit codes are unreliable, so check the output instead.
+  { steamcmd +login anonymous "$@" +quit || true; } | clean_output > "${outfile}"
+  cat "${outfile}"
+  if [ ! -s "${outfile}" ]; then
+    echo "Error: ${outfile} is empty" >&2
+    exit 1
+  fi
 }
 
 echo ""
@@ -38,7 +38,7 @@ echo "================================="
 
 run_steamcmd "steamcmd_help.txt" +help
 for topic in login scripts commandline convars app_build app_update; do
-	run_steamcmd "steamcmd_help_${topic}.txt" "+help ${topic}"
+  run_steamcmd "steamcmd_help_${topic}.txt" "+help ${topic}"
 done
 
 # Full list of all commands and convars.
