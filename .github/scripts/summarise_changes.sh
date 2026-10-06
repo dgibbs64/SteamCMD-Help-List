@@ -45,10 +45,18 @@ if [ -n "${message}" ]; then
 
   if [ -f "${changelog}" ]; then
     # Insert the new entry after the header (first two lines).
-    { head -n 2 "${changelog}"; cat "${entry}"; tail -n +3 "${changelog}"; } > "${changelog}.tmp"
+    {
+      head -n 2 "${changelog}"
+      cat "${entry}"
+      tail -n +3 "${changelog}"
+    } > "${changelog}.tmp"
     mv "${changelog}.tmp" "${changelog}"
   else
-    { echo "# Changelog"; echo ""; cat "${entry}"; } > "${changelog}"
+    {
+      echo "# Changelog"
+      echo ""
+      cat "${entry}"
+    } > "${changelog}"
   fi
   rm -f "${entry}"
   sed -n '1,20p' "${changelog}"
