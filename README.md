@@ -32,7 +32,6 @@ Looking for every SteamCMD command and convar? See [SteamCMD Commands List](http
 
 ## Tracking changes
 
-- [CHANGELOG.md](CHANGELOG.md) lists each day the output changed, which files changed and the SteamCMD version.
 - [steamcmd_version.txt](steamcmd_version.txt) holds the SteamCMD version the files were generated with.
 - To be notified, watch the repo or subscribe to the [commits feed](https://github.com/dgibbs64/SteamCMD-Help-List/commits/main.atom).
 
