@@ -1,88 +1,515 @@
 ConVars:
-nClientBackgroundAutoUpdateRecentlyPlayedThresholdHours = "72"         : If you've played the game more recently than this, we'll schedule the background update sooner.
-nClientBackgroundAutoUpdateTimeSpreadMinutes = "360"        : Spread of time around the above target hour - this is the +/- 2-sigma window, so half this on either side.
-   nClientBackgroundAutoUpdateTargetHour = "4"          : Target hour, in local time, for auto-scheduled app updates. Will be spread around this point via the convar below.
-nClientBackgroundAutoUpdateLessRecentlyPlayedThresholdHours = "720"        : If you've played the game more recently than this, we'll schedule the background update sooner.
-nClientBackgroundAutoUpdateNotPlayedTimeSpreadDays = "14"         : If the user hasn't played this game in a while, pick a morning up to this many days out to update.
-                sDepotDownloadFileFilter = ""           : only download matching files, eg *.exe;*.dll
-                         controller_rate = "2000"       : SteamInput Active Polling interval in microseconds. Default 2000us = 500hz
-           controller_idle_poll_interval = "50000"      : SteamInput Idle Polling interval in microseconds. Default 50,000us = 20hz
-    force_software_gyro_drift_correction = "0"          : 0: Only use software drift calibration based on controller capabilities. 1: Any controllers with IMUs will be forced to use the standard software drift calibration.
-               triton_imu_sensortime_log = "0"          : Spew the triton IMU sensor timings to console.
-           gyro_drift_correction_enabled = "1"          : Turn on/off software gyro anti-drift correction.
-    gyro_calibration_duration_stationary = "5.0"        : Duration in second of gyro noise tolerance calibration.
-        gyro_calibration_duration_manual = "5.0"        : Duration in second of manual gyro drift calibration. Longer durations make for more accurate drift corrections.
-gyro_calibration_duration_manual_timeout = "30.0"       : Duration before manual gyro drift calibration times out, and returns to calibrating the noise tolerance.
-     gyro_calibration_duration_automatic = "5.0"        : Duration in seconds required to calibrate gyro drift outside of manual calibration. Warning: Short calibration times are more likely to result in false positive anti-drift solutions.
-       gyro_stationary_calibration_debug = "0"          : Display which sensor readings (accelerometer or gyroscope) are restarting the tolerance calibration due to their noise being too large.
-            gyro_drift_calibration_debug = "0"          : Display which sensor readings (accelerometer or gyroscope) are restarting the drift calibration due to their noise being bigger than noise tolerance.
-           gyro_drift_detection_duration = "30.0"       : How long we sample for before triggering a calibration warning. Seconds.
-     gyro_drift_detection_min_drift_rate = "0.1"        : The minimum degrees per second we consider to be gyro drift. i.e. if we notice the gyroscope has drifted at higher than this rate, it could be drifting noticeably.
-     gyro_drift_detection_min_deflection = "270.0"      : The minimum degrees of deflection we must have turned through to detect a drift event. This intentionally higher than rotations we'd expect from regular use.
-              gyro_drift_detection_debug = "0"          : Spew information about how far the gyro has deflected over time.
-                     gyro_filter_enabled = "1"          : Enable (Pseudo) One Euro Filter to internal gyro quaternion. This reduces low level sensor noise and hand shake. 
-                   gyro_filter_min_speed = "2"          : Below this gyro rotation speed (degrees/second) we apply max smoothing (low pass filter).
-                   gyro_filter_max_speed = "16.0"       : Above this gyro rotation speed (degrees/second) we apply min (zero) smoothing.
-                  gyro_filter_smoothness = "75"         : Smoothing amount for low pass filter. 1 is TOO smoothed (barely responding). 100 is barely smoothed.
-               controller_jerk_threshold = "500"        : The amount of Gyro Jerk (gyro change per second) required to create a Controller Jerk count. Note, only available on SteamDeck/Neptune/Galileo
-    controller_jerk_low_pass_filter_rate = "4"          : How quickly the low pass filter chases the raw gyro jerk value.
-                controller_jerk_throttle = "2"          : (Hz) The maximum callback rate for Controller Jerk Events.
-                  gyro_force_sensor_rate = "0"          : If zero, cull suspected bad sensor data (can result in a loss of natural sensitivity). If not zero, ignore IMU sensor timing and use fixed rate instead. Measured in HZ. Common values: 250hz (PS5), 250hz (PS4), 200hz (Nintendo Switch)
-           gyro_auto_detect_polling_rate = "1"          : Wired Connections only. 0: Legacy Mode. Known to be buggy with Blitz 2 and other controllers set to 1000hz+. 1: If SDL3 sensor delta time is zero, or unexpected sensor timings are detected, fall back on packet-rate based estimation of polling rate (if outside a margin of error: gyro_sensor_margin_of_error_pct). 2: Exclusively use packet-rate based estimation of polling rate.
-         gyro_sensor_margin_of_error_pct = "25"         : If gyro_auto_detect_polling_rate is set to mode 2, use this +/- X% value as the acceptable margin of error before falling back on packet-rate based estimation of polling rate.
-         gyro_force_handheld_orientation = "0"          : 0: Auto. 1: Force Controller to be "HandHeld" orientation, like SteamDeck (tilt in pitch by 90 degrees so that "Yaw" is "Through the Screen". 2: Force Controller to be "Standalone" controller like Steam Controller, where "Yaw" is "Through Sticks". 
-              gyro_handheld_pitch_offset = "90"         : When in handheld mode, how far we tilt the gyro quaternion before processing. This affects only the "Gyro to Mouse" and "Gyro to JoystickCamera" modes. And only affects Yaw, Roll, Yaw + Roll, and Laser Pointer 3DOF to 2D conversion styles within those modes. Player Space and World Space are controller affordance agnostic.
-gyro_debug_gyro_speed_vs_quaternion_speed = "0"          : 0: Off. 1: Spew the gyro speed and the extracted quaternion rotation speed
-        gyro_debug_hardware_vs_mode_time = "0"          : 0: Off. 1: Spew the hardware delta time vs. the platform delta time.
-               gyro_haptic_probe_enabled = "0"          : 0: Off. 1: Try new gyro mode. Config must have haptic level set to something other than "off
-
-          gyro_haptic_probe_offset_scale = "0.65"       : How far to spread the haptic probe set is spread out. 0 = ontop of each other. 1 = 1 degree separation.
-             gyro_haptic_probe_min_speed = "0.125"      : Lowest speed for haptic probe movement. Degrees per second.
-             gyro_haptic_probe_max_speed = "360.0"      : Highest speed for haptic probe movement. Degrees per second.
-                 gyro_haptic_probe_types = "3"          : 0: None. 1: Trackpad Only. 2: Rumble Only. 3: Both
-             gyro_to_joystick_camera_raw = "1"          : Used to test old Gyro to joystick Camera processing pipeline (1) against old (0).
-           gyro_to_joystick_camera_relax = "0"          : Low pass filter on the output to help lower FPS games. Needs more thought.
-                       gyro_raw_deadzone = "6.0"        : Legacy deadzoning for gyro signal. Only affects "As Mouse" and its derivative modes.
-             gyro_speed_deadzone_enabled = "1"          : Enable the minimum speed required to update the gyroscope response.
-            gyro_precision_speed_enabled = "1"          : Enable linear response multiplier to speeds below the value set in the "Gyro To..." modes. This applies itself to the remaining speed after the gyro speed deadzone has been applied.
-                 gyro_prediction_enabled = "1"          : Enable extrapolation of rotation using the last known gyro speed. This is important to avoid staggered signals over blue tooth, but generally upgrades gyros that run lower than 500hz. The extrapolated quaternion will correct back toward the "ground truth" quaternion when the speed exceeds.
-    gyro_prediction_correction_speed_min = "30.0"       : Below this speed (degrees per second) there is no correction of the predicted quaternion toward the  "ground truth" quaternion.
-    gyro_prediction_correction_speed_max = "180.0"      : Above this speed (degrees per second) there is full correction of the predicted quaternion toward the  "ground truth" quaternion. Note this will still be gradual correction, and only in the shared direction of user rotation and the correction required.
-    gyro_use_polling_time_for_prediction = "1"          : Use the main loop's cached time as opposed to a fresh sample. Just for A/B testing.
-                   @uDownloadLANPeerPort = "27038"      : If LAN p2p download enabled, will listen on this port for TCP connections from peers. Must be set consistently across all members of the group!
-          @sTrustedLocalContentCacheName = ""           : Set this to the machine name where a trusted local Steam download cache is hosted, and we'll use it if available.
-@nClientDownloadInitWindowSizeHTTP2Stream = "4000000"    : Init per-stream window size for HTTP/2.
-@nClientDownloadInitWindowSizeHTTP2Connection = "32000000"   : Init per-connection window size for HTTP/2.
-            @sSiteLicenseProxyExplicitIP = ""           : Local content cache: if not blank, will instruct clients to go to this IP for the content cache.
+               @CSInterfaceProxyPassword = ""           : 
+               @CSInterfaceProxyUsername = ""           : 
+          @CustomBinaryRequestRetryTimes = "20"         : 
+                 @DepotBuilderConfigRoot = "./depotscripts" : 
+                @DepotBuilderContentRoot = ""           : 
+             @DepotBuilderDeltaMaxChunks = "20000"      : 
+                  @DepotBuilderEnableVZd = "1"          : 
+    @DepotBuilderMaxParallelUploadChunks = "96"         : 
+                  @DepotBuilderNoReslist = "0"          : 
+        @DepotBuilderNumHTTPSocketsToMDS = "48"         : 
+                 @DepotBuilderOutputRoot = ""           : 
+       @DepotBuilderParallelUploadChunks = "6"          : 
+            @DepotBuilderProgressTimeout = "1000"       : 
+                @DepotBuilderVZdMinRatio = "0.4"        : 
+            @DepotBuilderXORMatchPercent = "95"         : 
+                       @EnableUDPHistory = "0"          : 
+                     @ForceContentServer = ""           : 
+                @ForceContentServerHTTPS = "0"          : 
+                 @ForceContentServerType = ""           : 
+                         @GCNameOverride = ""           : 
+                     @LocalContentServer = ""           : 
+                      @LogFileFolderName = ""           : Use something other than 'logs' as the folder for log files
+          @MatchmakingCreatePingWaitTime = "0"          : 
+            @MatchmakingJoinPingWaitTime = "0"          : 
+          @MatchmakingSearchPingWaitTime = "0"          : 
+           @MatchmakingTotalPingWaitTime = "0"          : 
+@MaxOutstandingSendThreadItemFatalAssert = "30000"      : 
+@MaxOutstandingSendThreadItemFatalAssertSecondsAtLimit = "30"         : 
+      @MaxOutstandingSendThreadItemSleep = "10000"      : 
+            @NetConnectionBufferMsgLimit = "1000"       : Max # of message that will be buffered into a single zipped packet
+            @NetConnectionBufferThreaded = "1"          : 
+                    @NoPromptForPassword = "0"          : 
+               @PeerContentClientMaxJobs = "1"          : number of peer sources used at the same time
+            @PeerContentServerMaxClients = "8"          : limit number of peers connected
+                  @PeerContentServerPort = "27040"      : If peer content server, will listen on this port for TCP connections from peers
+            @PeerContentServerRetryDelay = "60"         : seconds before retrying peer content server
+                @ShutdownOnFailedCommand = "1"          : Exit steamcmd immediately upon any failed console command
+                       @StreamClientArgs = ""           : 
+            @WatchdogThreadPercentReport = "10"         : 
+                        @bCSForceNoCache = "0"          : 
+@bCallerDeadlineAbortJobDisableWhenHTTPReqStart = "1"          : 
+                @bClientDownloadUseHTTPS = "0"          : Set this to use HTTPS on supported download servers
+        @bClientOpenCacheStickyRedirects = "1"          : 
+   @bClientTryRequestManifestWithoutCode = "0"          : If set, client will try to get a manifest even without a manifest request code
+  @bCloudSyncFailDownloadIfGameOutOfDate = "0"          : 
+          @bDepotBuilderReadBufferSizeKB = "8192"       : 
+           @bDepotBuilderUnbufferedReads = "1"          : 
+             @bDisableDualStackDownloads = "0"          : 
+       @bDownloadThrottleDuringCloudSync = "0"          : 
+        @bEnableFrameFuncOverageWarnings = "0"          : This turns on the spew in SPEW_MISC at level 4, still need to adjust spew levels to see it.
+          @bEnableHTTP2OnAllCHTTPClients = "0"          : Enable HTTP/2 on all CHTTPClients automatically for SSL connections
+                      @bEnableLogTearOff = "1"          : 
+         @bEnableNetworkJobsOwnStartList = "1"          : 
+              @bEnableOfflineLogonTicket = "1"          : If true, an offline logon ticket will be requested during logon if none is cached
+              @bEnableSiteLicenseConnect = "1"          : 
+       @bEnableSiteLicenseConsoleLogging = "0"          : 
+                    @bEnableSpewThrottle = "1"          : 
+              @bEnforceValidEmailDomains = "1"          : Enable valid email domains in BIsValidEmailAddress
+             @bForceStreamUnsupportedApp = "0"          : 
+                @bHTTPServerHTTP2Enabled = "0"          : Global default for whether CHTTPServer advertises/accepts HTTP/2 (over TLS via ALPN). A server that calls SetHTTP2Enabled() explicitly overrides this value.
+     @bHttpClientRecordHostnameDimension = "0"          : Group HTTP metrics by hostname.  Careful, the cardinality of your in-memory map might be large.
+           @bLANPeerConnectionTimeoutSec = "5"          : 
+             @bLogMessageToProtobufClass = "1"          : We we first discover the protobuf class used for a particular EMsg, log it
+                        @bMetricsEnabled = "1"          : Enabling allows jobs to collect and report metrics through IMetricsReporters.
+                          @bMsgErrorDump = "0"          : 
+          @bProfileYieldsInTestSuiteJobs = "0"          : 
+      @bRefreshDownloadSourcesFrequently = "1"          : 
+             @bRequireOfflineLogonTicket = "1"          : If true, a valid offline logon ticket is required when logging in in offline or no connection mode
+          @bScreenshotsLegacyCloudUpload = "0"          : If set, use the legacy Steam Cloud upload path for screenshot uploads
+@bShaderClientGetBucketManifestUseWebAPI = "1"          : 
+@bSiteLicenseAllowCachedClientCredentials = "0"          : Allow Steam clients that associate to this site to save username and auth credentials locally
 @bSiteLicenseProxyCacheIsExternalProcess = "0"          : If set, the caching content proxy will be handled by some process other than steamcmd. You probably also should set @sSiteLicenseProxyExplicitIP.
-       @nClientInitWindowSizeHTTP2Stream = "2000000"    : Init per-stream window size for HTTP/2.
-   @nClientInitWindowSizeHTTP2Connection = "10000000"   : Init per-connection window size for HTTP/2.
-             @nBootReserveRetryPeriodSec = "30"         : Number of seconds to wait before retrying after failing to create a boot reserve file. Should be a multiple of 10.
+            @bSiteLicenseProxyEnableIPv6 = "0"          : If set, we will enable ipv6 communications to the Steam servers
+                     @bSiteLicenseServer = "0"          : 
+                  @bSiteLicenseServerGUI = "0"          : 
+          @cCSClientMaxNumSocketsPerHost = "8"          : 
+@cCSClientMaxNumSocketsPerHostForCachingProxy = "32"         : 
+         @cDefaultInitialDownloadSources = "8"          : 
+       @cDepotBuilderFileChunkingThreads = "8"          : 
+  @cFileChunkingCRCFalseAlarmBytesToSkip = "128"        : 
+    @cFileChunkingCRCFalseAlarmThreshold = "0"          : 
+        @cFileChunkingSupersectionSizeMB = "1024"       : 
+            @cMaxContentServersToRequest = "20"         : 
+             @cMaxInitialDownloadSources = "-1"         : 
+     @cMinimumJobTimeoutsToCheckPerFrame = "100"        : 
+ @cNetEncryptionHandshakeWorkMax_HighPri = "8000"       : 
+  @cNetEncryptionHandshakeWorkMax_LowPri = "2000"       : 
+  @cNetEncryptionHandshakeWorkMax_MedPri = "4000"       : 
+                @cSecUploadDownloadRates = "300"        : 
+                        @cUDPSendRetries = "8"          : 
+               @cbPartnerUploadChunkSize = "1000000"    : Chunk size to use for POSTing partner uploads
+               @cloud_testdynamicsyncapp = "0"          : 
+   @csecCSJobSuccessfulRequestTimeWindow = "60"         : 
+          @csecCSRequestProcessorTimeOut = "300"        : 
               @csecDurationControlPeriod = ""           : Override default duration-control / anti-indulgence time period. If nonzero, initial playtime threshold is this value in seconds
          @csecDurationControlPeriodToday = ""           : Override default duration-control / anti-indulgence time period. If nonzero, per-day playtime threshold is this value in seconds
            @csecDurationControlSimulated = ""           : Simulate having already played this many seconds of playtime.
   @csecDurationControlSimulatedNonRecent = ""           : Simulate having already played this many seconds of playtime today, but not recently.
+       @csecFavoriteGameAccountCacheTime = "86400"      : Control how often we refresh the account IDs in the game server favorites list
+             @csecIncomingDataRatePeriod = "1"          : 
+           @csecSiteLicenseProxyStatsLog = "60"         : Log proxy stats this often
+        @csecSiteLicenseProxyStatsUpdate = "1"          : update proxy stats internally this often
+    @csecUpdateTargetNumConnectionsEpoch = "10"         : 
               @durationControlNightCheck = "1"          : Time of day check for duration-control feature. 1 = normal. 2 = force night-time. 0 = disable checks, only enabled for age verified accounts
-       @test_nCloudForceSyncFailureAppID = "0"          : Set this to a non-zero App ID to test cloud sync failure. The next sync request will fail.
-        @bEnableFrameFuncOverageWarnings = "0"          : This turns on the spew in SPEW_MISC at level 4, still need to adjust spew levels to see it.
-     @bHttpClientRecordHostnameDimension = "0"          : Group HTTP metrics by hostname.  Careful, the cardinality of your in-memory map might be large.
-          @nHTTPServerLogLevelDetails200 = "4"          : Log level to use for full details of any http server request returning 200.  This will probably fill up the log if you leave it on.
-                @bHTTPServerHTTP2Enabled = "0"          : Global default for whether CHTTPServer advertises/accepts HTTP/2 (over TLS via ALPN). A server that calls SetHTTP2Enabled() explicitly overrides this value.
-@nHTTPServerHTTP2InitWindowSizePerStream = "1048576"    : Default HTTP/2 per-stream flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerStream().
-@nHTTPServerHTTP2InitWindowSizePerConnection = "3145728"    : Default HTTP/2 per-connection flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerConnection().
-   @nHTTPServerHTTP2MaxConcurrentStreams = "25"         : Default maximum concurrent HTTP/2 streams advertised per CHTTPServer connection. Overridden per-server by SetHTTP2MaxConcurrentStreamsPerConnection().
-                        @bMetricsEnabled = "1"          : Enabling allows jobs to collect and report metrics through IMetricsReporters.
+@fDownloadRateImprovementToAddAnotherConnection = "1.2"        : 
+@fMinDataRateToAttemptTwoConnectionsMbps = "1.5"        : 
+                @metricsDisabledCatalogs = ""           : Comma separated list of metrics catalogs to disable.  This is the last check.
               @metricsDisabledOperations = ""           : Comma separated list of metrics operations that are disabled.  This setting has highest priority
                @metricsEnabledOperations = ""           : Comma separated list of metrics operations.  Overrides disabled catalogs
-                @metricsDisabledCatalogs = ""           : Comma separated list of metrics catalogs to disable.  This is the last check.
+             @nBootReserveRetryPeriodSec = "30"         : Number of seconds to wait before retrying after failing to create a boot reserve file. Should be a multiple of 10.
+                 @nCSClientRateLimitKbps = "0"          : 
+                 @nCSJob404ResponseLimit = "100"        : 
+                 @nCSJob5xyResponseLimit = "10"         : 
             @nCallerDeadlineHopLatencyMS = "10"         : When we send a message expecting a reply from a job with a deadline, set the timeout on the message to [current time remaining in this job] - N ms.  A negative value prevents propagating caller deadlines down the chain
-        @bEnableFrameFuncOverageWarnings = "0"          : This turns on the spew in SPEW_MISC at level 4, still need to adjust spew levels to see it.
+@nClientCMDirectoryResultLoadPercentDither = "10"         : Dither to apply to CM server loads received by CMDirectory query
+@nClientCMUDPPingTimeGoodEnoughThresholdMS = "50"         : 
+ @nClientCMUDPPingTimeoutUseGoodEnoughMS = "250"        : 
+     @nClientCloudMaxMBParallelDownloads = "64"         : 
+       @nClientCloudMaxMBParallelUploads = "32"         : 
+      @nClientCloudMaxNumParallelDeletes = "10"         : 
+    @nClientCloudMaxNumParallelDownloads = "10"         : 
+      @nClientCloudMaxNumParallelUploads = "10"         : 
+      @nClientCloudMaxNumUploadsPerBatch = "100"        : 
+@nClientDownloadEnableHTTP2PlatformLinux = "0"          : Enable HTTP/2 connections on Linux clients
+@nClientDownloadEnableHTTP2PlatformWindows = "1"          : Enable HTTP/2 connections on Windows clients
+    @nClientDownloadEnableHTTP2RelBranch = "1"          : Only enable HTTP/2 on enabled platforms on rel branch client if this is set
+@nClientDownloadInitWindowSizeHTTP2Connection = "32000000"   : Init per-connection window size for HTTP/2.
+@nClientDownloadInitWindowSizeHTTP2Stream = "4000000"    : Init per-stream window size for HTTP/2.
+ @nClientDownloadProbUseHTTP2IfAvailable = "75"         : If http/2 is available for a given download source, use it w/ this probability [0,100]
+        @nClientEnableHTTP2PlatformLinux = "0"          : Enable HTTP/2 connections on Linux clients
+      @nClientEnableHTTP2PlatformWindows = "1"          : Enable HTTP/2 connections on Windows clients
+  @nClientEnableIPv6ForHTTPPlatformLinux = "0"          : Enable IPv6 HTTP connections by default on Linux clients
+@nClientEnableIPv6ForHTTPPlatformWindows = "0"          : Enable IPv6 HTTP connections by default on Windows clients
+        @nClientFrameRateReportBatchSize = "60"         : Number of frame rate reports to collect locally before sending to the server
+             @nClientFrameRateReportSecs = "60"         : Number of seconds between individual frame rate reports
+   @nClientInitWindowSizeHTTP2Connection = "10000000"   : Init per-connection window size for HTTP/2.
+       @nClientInitWindowSizeHTTP2Stream = "2000000"    : Init per-stream window size for HTTP/2.
+   @nClientQueryCMDirectoryBeforeConnect = "1"          : Use CMDirectory webapi to get fresh CM list on connect - 0=disabled, 1=enabled, 2=main/dev/beta clients only
+@nClientServiceMethodForDownloadListPercent = "100"        : 
+@nContentDeltaChunkAppendChunksAfterProtobufSizeThresholdMB = "33"         : 
+@nContentUpdateAutoVerifyCleanBytesThresholdMB = "2048"       : How many clean MB must we verify before backing off on auto-verifies
+         @nContentUpdateAutoVerifyEnable = "1"          : 0 = disabled; 1 = enabled all clients
+   @nContentUpdateAutoVerifyIntervalDays = "15"         : Auto-verify game updates ever N days
+           @nDownloadLANChunkCacheSizeMB = "128"        : 
+                  @nDownloadLANPeerGroup = "0"          : 
+@nHTTPServerHTTP2InitWindowSizePerConnection = "3145728"    : Default HTTP/2 per-connection flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerConnection().
+@nHTTPServerHTTP2InitWindowSizePerStream = "1048576"    : Default HTTP/2 per-stream flow-control initial window size in bytes for CHTTPServer connections. Overridden per-server by SetHTTP2FlowControlInitWindowSizePerStream().
+   @nHTTPServerHTTP2MaxConcurrentStreams = "25"         : Default maximum concurrent HTTP/2 streams advertised per CHTTPServer connection. Overridden per-server by SetHTTP2MaxConcurrentStreamsPerConnection().
+       @nHTTPServerLogLevelAccessLine200 = "3"          : Log level to use for one-line access-log-style for each http server request returning 200
+    @nHTTPServerLogLevelAccessLineNon200 = "2"          : Log level to use for one-line access-log-style for each http server request that returns != 200
+          @nHTTPServerLogLevelDetails200 = "4"          : Log level to use for full details of any http server request returning 200.  This will probably fill up the log if you leave it on.
+       @nHTTPServerLogLevelDetailsNon200 = "4"          : Log level to use for full details of any http server request returning != 200
+@nHTTPServerMaxPipelinedReqsPerConnection = "8"          : Max outstanding pipelined reqs per connection
+  @nHTTPServerYieldOn100ContinueSendSecs = "300"        : Seconds to yield when sending a 100 continue for purposes of telling client to send body of request
+                       @nIOCPThreadCount = "1"          : 
+@nJobInteryieldMillisecondsAlertThreshold = "120"        : 
+ @nJobInteryieldMillisecondsLogThreshold = "80"         : 
+@nJobInteryieldMillisecondsSpewThreshold = "500"        : 
+            @nJobNetSendsInsaneThreshold = "15000"      : 
+             @nLANPeerGroupRateLimitKbps = "0"          : 
+                 @nLANPeerMaxConnections = "24"         : 
+                  @nLANPeerRateLimitKbps = "0"          : 
+    @nLegalDictionaryUpdateRateInSeconds = "600"        : 
+           @nNetConnectionBufferZipLevel = "1"          : 
+              @nParentalSettingsLogLevel = "4"          : Control the amount of spew written to the parental log file
+      @nPartnerUploadFinalizeTimeoutSecs = "600"        : Seconds to timeout the DRM finalize which can be slow as it involves sending to cloud storage
+         @nProtobufArenaInitialBlockSize = "65536"      : Default initial allocation size for PB arena
+             @nProtobufArenaMaxBlockSize = "524288"     : Max block allocation size for PB arena
+   @nProtobufArenaNumberOfHeadersToShare = "128"        : Number of Jobs to give a single protobuf Arena before we create a new one
+      @nProtobufArenaNumberOfJobsToShare = "128"        : Number of Jobs to give a single protobuf Arena before we create a new one
+@nRoamingConfigReconnectCloudSyncWindowSec = "7200"       : 
+                @nScreenshotSaveMaxWidth = "9999"       : 
+      @nServerRefreshRateLimitAdditional = "1"          : Limits the burst number of calls per appid to refresh GMS game server lists
+           @nServerRefreshRateLimitBurst = "100"        : Limits the burst number of calls per appid to refresh GMS game server lists
+        @nServerRefreshRateLimitInterval = "5"          : Limits the burst number of calls per appid to refresh GMS game server lists
+            @nSiteLicenseProxyCacheMaxGB = "100"        : If local content cache is enabled, use up to this much disk space
+             @nSiteLicenseProxyEnableP2P = "0"          : If set, will have all connected clients join the same P2P download group
+                  @nSiteLicenseProxyPort = "0"          : Local content cache: set > 0 to enable, will listen on this port
+            @nSpewThrottleNagFrequencyMs = "5000"       : 
+                  @nSpewThrottlePeriodMs = "1000"       : 
+           @nSpewThrottleResumeThreshold = "3"          : 
+          @nSpewThrottleTriggerThreshold = "10"         : 
+     @nSpewThrottleUnconditionalResumeMs = "5000"       : 
+ @nSpewThrottleUnconditionalTriggerCount = "50"         : 
+              @net_backlog_bytes_allowed = "60000000"   : 
+           @net_backlog_time_allowed_sec = "8"          : 
+                           @net_loopback = "1"          : 
+                 @sCSDSVirtualHostHeader = ""           : 
+                @sForceLocalContentCache = ""           : 
+        @sSiteLicenseProxyCacheDirectory = "appcache/slscache" : If local content cache is enabled, use this path for disk cache
+            @sSiteLicenseProxyExplicitIP = ""           : Local content cache: if not blank, will instruct clients to go to this IP for the content cache.
+                         @sStartupScript = ""           : Exec contents of this convar as a script at startup
+          @sSteamCmdForcePlatformBitness = ""           : Must be one of: [32 | 64]
+             @sSteamCmdForcePlatformType = ""           : Must be one of: [windows | macos | linux | android]
+          @sTrustedLocalContentCacheName = ""           : Set this to the machine name where a trusted local Steam download cache is hosted, and we'll use it if available.
+                     @strCSNoCacheHeader = "no-cache"   : 
+           @test_bCloudForceSyncConflict = "0"          : If @test_nCloudForceSyncFailureAppID is set, then set this so that the failure case is 'file conflict' instead of generic failure
+       @test_nCloudForceSyncFailureAppID = "0"          : Set this to a non-zero App ID to test cloud sync failure. The next sync request will fail.
+                   @uDownloadLANPeerPort = "27038"      : If LAN p2p download enabled, will listen on this port for TCP connections from peers. Must be set consistently across all members of the group!
+           @uRemoteDiscoveryPortOverride = "0"          : If non-zero, will listen on this port for broadcasts instead of k_nBroadcastPort
+           @uRemoteDiscoveryPortTransmit = "0"          : If non-zero, will transmit outgoing broadcasts on this port instead of on the listen port
+        @unMinimumShaderDownloadSizeInUI = "33554432"   : 
+                        @unUserStatsTest = "250000"     : 
+                           @voice_minabs = "0.15"       : 
+                           @voice_minavg = "1.0"        : 
+              @voice_spew_activity_check = "0"          : 
+                AlwaysCustomizeOnBadExit = "0"          : 
+           AsyncFileIOAlternateReadWrite = "0"          : 
+                 AsyncFileIODisableWrite = "0"          : 
+          AsyncFileIOExpectOutstandingIO = "6"          : 
+               AsyncFileIOForceGenericIO = "0"          : 
+              AsyncFileIOMaxPendingWin32 = "256"        : 
+              AsyncFileIOReadHandleCache = "64"         : 
+             AsyncFileIOWriteHandleCache = "64"         : 
+          ClientConnectTokenBucketEnable = "1"          : 
+                       DepotDeltaPatches = "2"          : 
+            DepotDownloadProgressTimeout = "900"        : 
+                  DepotMinWriteGapSizeMB = "64"         : 
+             DepotReconstructionBadChunk = "0"          : 
+              DepotReconstructionLowPrio = "1"          : 
+         DepotReconstructionNumIOThreads = "32"         : 
+            DepotUseAlternatingReadWrite = "1"          : 
+               MergeCapReprocess_minutes = "480"        : 
+                         UGCCDNReportPct = "0"          : 
+                       app_force_preload = "0"          : force this app into preload mode
+                       app_info_http_min = "0"          : 
+               app_info_http_num_sockets = "8"          : 
+                        appcloudsessions = "all"        : 
+        bBroadcastAlwaysUploadThumbnails = "1"          : 
+                      bCheckUGCIntegrity = "1"          : 
+                   bClientConvar601DEACE = "1"          : 
+                bClientPingCSesForCellID = "0"          : 
+bCloudAcceptUnexpectedAutoCloudFileChanges = "1"          : 
+                 bDelayGameUpdatesOnBeta = "0"          : Should we do scheduling of updates on Steam Beta? If not, they'll all be ASAP
+                  bDepotDeltaPatchUseAPI = "1"          : 
+                    bDepotUseSparseFiles = "1"          : 
+                  bDisableTenFootOverlay = "0"          : 
+             bEnableMHRCAsyncFileReadLog = "0"          : 
+          bEnableSubscribedFileListCache = "1"          : 
+              bFinishStagedDepotVersions = "1"          : 
+                   bInstallscriptReports = "1"          : send reports about broken install scripts
+                bPrefetchDownloadDetails = "1"          : Prefetch download size before actual update happens
+                      bShaderAllowReplay = "1"          : 
+              bShaderAllowReplayOnNVIDIA = "1"          : 
+     bShaderAlwaysProcessWhenRunningGame = "0"          : 
+                   bShaderCacheDownloads = "1"          : Allow to download shader cache depots
+                      bShaderDepotNative = "1"          : 
+            bShaderEnableCacheManagement = "1"          : 
+             bShaderEnableFossilizeLayer = "1"          : 
+                     bShaderEnableUpload = "1"          : 
+               bShaderFossilizeFastMerge = "1"          : 
+                 bShaderPrecompiledCache = "1"          : 
+                      bShaderVerboseLogs = "0"          : 
+                   bSingleFileUpdateMode = "1"          : 
+                bSteam3LimitedUserEnable = "1"          : 
+                      bSteamLoaderEnable = "1"          : 
+      bSubscribedFilesDecompressOnClient = "1"          : 
+        bSubscribedFilesUseRangeRequests = "1"          : 
+                     bVerifyAllDownloads = "0"          : Verify all files after downloading an update
+                     bVerifyAllInstalled = "0"          : Verify all installed files before installing an update
+                         batterycharging = "0"          : 
+                          batterypercent = "-1"         : 
+                             batterytime = "-1"         : 
+               broadcast_upload_drop_sec = "6"          : 
+             broadcast_upload_update_sec = "3"          : 
+                  cAppUpdateWorkingSetMB = "256"        : 
+                  cChunkValidationMaxLog = "100"        : 
+                   cFileValidationMaxLog = "100"        : 
+              cMaxDecryptThreadsOverride = "0"          : 
+               cPreallocateMinimumSizeKB = "256"        : 
+          controller_base_rotation_angle = "0"          : 
+                  controller_edge_cutoff = "0"          : 
+                 controller_gyro_x_scale = "16000"      : 
+           controller_idle_poll_interval = "50000"      : SteamInput Idle Polling interval in microseconds. Default 50,000us = 20hz
+    controller_jerk_low_pass_filter_rate = "4"          : How quickly the low pass filter chases the raw gyro jerk value.
+               controller_jerk_threshold = "500"        : The amount of Gyro Jerk (gyro change per second) required to create a Controller Jerk count. Note, only available on SteamDeck/Neptune/Galileo
+         controller_jerk_threshold_debug = "0"          : Debug spew to tell us the current "Jerk" value coming from the accelerometer
+                controller_jerk_throttle = "2"          : (Hz) The maximum callback rate for Controller Jerk Events.
+          controller_min_activation_time = "0.0333"     : 
+             controller_momentum_min_vel = "0"          : 
+controller_momentum_num_excluded_samples = "1"          : 
+controller_momentum_num_included_samples = "5"          : 
+                   controller_poll_state = "-1"         : 
+                         controller_rate = "2000"       : SteamInput Active Polling interval in microseconds. Default 2000us = 500hz
+            controller_simulate_trackpad = "0"          : Simulate a trackpad swipe on the right trackpad when the left pad is touched
+                   controller_spew_level = "3"          : 
+                             countrycode = ""           : 
+             csecManifestDownloadTimeout = "120"        : 
+             deck_mouse_haptic_tick_dist = "9000"       : 
+              deck_mouse_leftside_filter = "30500"      : 
+                               developer = "0"          : 
+    force_software_gyro_drift_correction = "0"          : 0: Only use software drift calibration based on controller capabilities. 1: Any controllers with IMUs will be forced to use the standard software drift calibration.
+         g_RumbleRepeatAfterDelaySeconds = "0.050"      : 
+              g_RumbleSustainTimeSeconds = "10"         : 
+                  grip_sense_haptic_test = "0"          : 
+          grip_sense_haptic_test_repeats = "1"          : 
+         grip_sense_haptic_test_strength = "125"        : 
+           gyro_auto_detect_polling_rate = "1"          : Wired Connections only. 0: Legacy Mode. Known to be buggy with Blitz 2 and other controllers set to 1000hz+. 1: If SDL3 sensor delta time is zero, or unexpected sensor timings are detected, fall back on packet-rate based estimation of polling rate (if outside a margin of error: gyro_sensor_margin_of_error_pct). 2: Exclusively use packet-rate based estimation of polling rate.
+     gyro_calibration_duration_automatic = "5.0"        : Duration in seconds required to calibrate gyro drift outside of manual calibration. Warning: Short calibration times are more likely to result in false positive anti-drift solutions.
+        gyro_calibration_duration_manual = "5.0"        : Duration in second of manual gyro drift calibration. Longer durations make for more accurate drift corrections.
+gyro_calibration_duration_manual_timeout = "30.0"       : Duration before manual gyro drift calibration times out, and returns to calibrating the noise tolerance.
+    gyro_calibration_duration_stationary = "5.0"        : Duration in second of gyro noise tolerance calibration.
+gyro_debug_gyro_speed_vs_quaternion_speed = "0"          : 0: Off. 1: Spew the gyro speed and the extracted quaternion rotation speed
+        gyro_debug_hardware_vs_mode_time = "0"          : 0: Off. 1: Spew the hardware delta time vs. the platform delta time.
+               gyro_debug_sensor_timings = "0"          : 
+            gyro_drift_calibration_debug = "0"          : Display which sensor readings (accelerometer or gyroscope) are restarting the drift calibration due to their noise being bigger than noise tolerance.
+           gyro_drift_correction_enabled = "1"          : Turn on/off software gyro anti-drift correction.
+              gyro_drift_detection_debug = "0"          : Spew information about how far the gyro has deflected over time.
+           gyro_drift_detection_duration = "30.0"       : How long we sample for before triggering a calibration warning. Seconds.
+     gyro_drift_detection_min_deflection = "270.0"      : The minimum degrees of deflection we must have turned through to detect a drift event. This intentionally higher than rotations we'd expect from regular use.
+     gyro_drift_detection_min_drift_rate = "0.1"        : The minimum degrees per second we consider to be gyro drift. i.e. if we notice the gyroscope has drifted at higher than this rate, it could be drifting noticeably.
+                     gyro_filter_enabled = "1"          : Enable (Pseudo) One Euro Filter to internal gyro quaternion. This reduces low level sensor noise and hand shake. 
+                   gyro_filter_max_speed = "16.0"       : Above this gyro rotation speed (degrees/second) we apply min (zero) smoothing.
+                   gyro_filter_min_speed = "2"          : Below this gyro rotation speed (degrees/second) we apply max smoothing (low pass filter).
+                  gyro_filter_smoothness = "75"         : Smoothing amount for low pass filter. 1 is TOO smoothed (barely responding). 100 is barely smoothed.
+         gyro_force_handheld_orientation = "0"          : 0: Auto. 1: Force Controller to be "HandHeld" orientation, like SteamDeck (tilt in pitch by 90 degrees so that "Yaw" is "Through the Screen". 2: Force Controller to be "Standalone" controller like Steam Controller, where "Yaw" is "Through Sticks". 
+                  gyro_force_sensor_rate = "0"          : If zero, cull suspected bad sensor data (can result in a loss of natural sensitivity). If not zero, ignore IMU sensor timing and use fixed rate instead. Measured in HZ. Common values: 250hz (PS5), 250hz (PS4), 200hz (Nintendo Switch)
+              gyro_handheld_pitch_offset = "90"         : When in handheld mode, how far we tilt the gyro quaternion before processing. This affects only the "Gyro to Mouse" and "Gyro to JoystickCamera" modes. And only affects Yaw, Roll, Yaw + Roll, and Laser Pointer 3DOF to 2D conversion styles within those modes. Player Space and World Space are controller affordance agnostic.
+               gyro_haptic_probe_enabled = "0"          : 0: Off. 1: Try new gyro mode. Config must have haptic level set to something other than "off
+             gyro_haptic_probe_max_pulse = "100"        : How loud the grip effect gets at max speed
+             gyro_haptic_probe_max_speed = "360.0"      : Highest speed for haptic probe movement. Degrees per second.
+             gyro_haptic_probe_min_pulse = "20"         : How loud the grip effect gets at max speed
+             gyro_haptic_probe_min_speed = "0.125"      : Lowest speed for haptic probe movement. Degrees per second.
+          gyro_haptic_probe_offset_scale = "0.65"       : How far to spread the haptic probe set is spread out. 0 = ontop of each other. 1 = 1 degree separation.
+                 gyro_haptic_probe_types = "3"          : 0: None. 1: Trackpad Only. 2: Rumble Only. 3: Both
+                    gyro_precision_speed = "0.75"       : 
+            gyro_precision_speed_enabled = "1"          : Enable linear response multiplier to speeds below the value set in the "Gyro To..." modes. This applies itself to the remaining speed after the gyro speed deadzone has been applied.
+    gyro_prediction_correction_speed_max = "180.0"      : Above this speed (degrees per second) there is full correction of the predicted quaternion toward the  "ground truth" quaternion. Note this will still be gradual correction, and only in the shared direction of user rotation and the correction required.
+    gyro_prediction_correction_speed_min = "30.0"       : Below this speed (degrees per second) there is no correction of the predicted quaternion toward the  "ground truth" quaternion.
+                 gyro_prediction_enabled = "1"          : Enable extrapolation of rotation using the last known gyro speed. This is important to avoid staggered signals over blue tooth, but generally upgrades gyros that run lower than 500hz. The extrapolated quaternion will correct back toward the "ground truth" quaternion when the speed exceeds.
+                       gyro_raw_deadzone = "6.0"        : Legacy deadzoning for gyro signal. Only affects "As Mouse" and its derivative modes.
+         gyro_sensor_margin_of_error_pct = "25"         : If gyro_auto_detect_polling_rate is set to mode 2, use this +/- X% value as the acceptable margin of error before falling back on packet-rate based estimation of polling rate.
+                     gyro_speed_deadzone = "0.5"        : 
+             gyro_speed_deadzone_enabled = "1"          : Enable the minimum speed required to update the gyroscope response.
+       gyro_stationary_calibration_debug = "0"          : Display which sensor readings (accelerometer or gyroscope) are restarting the tolerance calibration due to their noise being too large.
+             gyro_to_joystick_camera_raw = "1"          : Used to test old Gyro to joystick Camera processing pipeline (1) against old (0).
+           gyro_to_joystick_camera_relax = "0"          : Low pass filter on the output to help lower FPS games. Needs more thought.
+    gyro_use_polling_time_for_prediction = "1"          : Use the main loop's cached time as opposed to a fresh sample. Just for A/B testing.
+              haptic_click_gain_modifier = "0"          : 
+                        haptic_intensity = "8000"       : 
+                    haptic_intensity_old = "2500"       : 
+                              haptic_new = "0"          : 
+                      haptic_off_divisor = "5.0f"       : 
+               haptic_tick_gain_modifier = "0"          : 
+              ibex_mouse_leftside_filter = "32500"      : 
+                    ibex_rumble_deadzone = "635"        : 
+                      lenovo_hook_filter = "31500"      : 
+                  log_files_always_flush = "0"          : 
+               log_matchmaking_callbacks = "0"          : 
+                            mic_autogain = "16000"      : automatic gain control level for microphone input
+                           mic_inputfile = ""           : causes voice data to be read from the specified file instead of from the microphone
+                          mic_outputfile = ""           : causes microphone data to be written out to the specified file
+                            musiclogging = "0"          : 
+          nBroadcastSessionMaxDropFrames = "100"        : 
+nClientBackgroundAutoUpdateLessRecentlyPlayedThresholdHours = "720"        : If you've played the game more recently than this, we'll schedule the background update sooner.
+nClientBackgroundAutoUpdateNotPlayedTimeSpreadDays = "14"         : If the user hasn't played this game in a while, pick a morning up to this many days out to update.
+nClientBackgroundAutoUpdateRecentlyPlayedThresholdHours = "72"         : If you've played the game more recently than this, we'll schedule the background update sooner.
+   nClientBackgroundAutoUpdateTargetHour = "4"          : Target hour, in local time, for auto-scheduled app updates. Will be spread around this point via the convar below.
+nClientBackgroundAutoUpdateTimeSpreadMinutes = "360"        : Spread of time around the above target hour - this is the +/- 2-sigma window, so half this on either side.
+      nCloudFileCompressionMinFileSizeKB = "16"         : 
+nCloudFileCompressionMinFileSizeKBSharedFile = "128"        : 
+      nCloudFileCompressionPercentageMin = "10"         : 
+nCloudFileCompressionPercentageMinSharedFile = "50"         : 
+              nCloudUploadMinIntervalSec = "1800"       : 
+       nCloudUploadNetworkTimeoutSeconds = "400"        : 
+           nContentDownloadsToOtherDrive = "1"          : Allow to download updates to other drives then install folder is on
+             nContentStatsReportInterval = "72"         : In Hours
+                 nDepotSaveCorruptChunks = "0"          : 
+                 nPeerContentDefaultMode = "1"          : 0 = off, 1 = only me, 2 = only friends, 3 = anyone
+              nProductInfoUpdateInterval = "900"        : 
+         nRichPresenceUploadThrottleSecs = "5"          : 
+                       net_incomingcheck = "1"          : 
+                  net_maxresendsperframe = "32"         : 
+                      p2p_connecttimeout = "15"         : 
+                       p2p_unusedtimeout = "120"        : 
+                sDepotDownloadFileFilter = ""           : only download matching files, eg *.exe;*.dll
+               sc_kalman_repeated_sample = "0"          : 
+                    spew_controller_loss = "0"          : 
+             steam_controller_force_oobe = "0"          : 
+                       testappcloudpaths = "0"          : 
+               triton_imu_sensortime_log = "0"          : Spew the triton IMU sensor timings to console.
+            ugc_query_default_cache_time = "600"        : 
+               ugc_query_max_get_details = "1000"       : 
+     unShaderBackgroundProcessingThreads = "0"          : 
+   unShaderHighPriorityProcessingThreads = "0"          : 
+              unShaderHitCacheGeneration = "4"          : 
+            unShaderMaxHeadersPerMessage = "1024"       : 
+          unShaderMaxUploadMessageSizeKb = "256"        : 
+                   voice_api_optimalrate = "24000"      : 
+                          voice_autogain = "0"          : 
+                          voice_fakeloss = "0"          : 
+                      voice_outputdevice = "0"          : 0=>Miles 1=>XAudio2
+                        voice_outputfile = ""           : causes output from voice system to be written out to the specified file
+                        voice_preprocess = "0"          : enables voice cleanup on incoming microphone data
+                           voice_quality = "6"          : 
+                  voice_resample_quality = "1"          : 
+                      voice_silk_bitrate = "30000"      : 
+               workshop_items_cache_days = "14"         : 
+      workshop_items_full_check_interval = "86400"      : 
+          workshop_items_update_interval = "2700"       : 
+
 Commands:
+                               api_logging : api_logging <enabled> <verbose> : enable/disable verbose API logging in steamcmd
+                                app_backup : <appid> <target folder> ax folder size MB]
+                      app_build_all_depots : app_build_all_depots [-desc <text>] -depotconfigpath <folder> -contentroot <folder> -buildoutput <folder> <appid>  : Build all depots for one app
+                         app_debug_install : <appId> [<path>] - app debug install
+                          app_delay_update : <appid> <seconds> force delay update
+                            app_dlc_status : app_status <appId> <dlcId>
                              app_info_find : Find apps with a certain appinfo value set, eg 'common/type media'. * is any. 
-                            app_set_config : <AppID> <key> <value> - sets a config value for given app.
-                                   log_ipc : usage: "log_ipc [counts|verbose|#maxcount] <filter>" Enables IPC logging. Specifying "counts" or "verbose" is optional, defaulting to counts.
-                                  p2p_info : usage: "p2p_info" Displays the current state of the P2P networking subsystem.
-                         clear_credentials : Clear cached credentials for current user. The next login will require authentication including an email or mobile confirmation.
-                        app_install_script : <AppID> [uninstall:0|1]- Runs app install script.
-                       app_license_request : <AppID> - Requests a free licenses for this app if not already owned.
+                            app_info_print : app_info_print <appid> [section] : print app info for appID
                           app_info_request : <AppID> - Issue an appinfo request for the given appid. Does not wait for results from the server.
+                           app_info_update : [0|1] : trigger app info update, optionally for update all
+                        app_install_script : <AppID> [uninstall:0|1]- Runs app install script.
+                       app_installed_files : <AppID> 
+                                app_launch : <appId> [LaunchOptionIndex] [Arguments]
+                       app_license_request : <AppID> - Requests a free licenses for this app if not already owned.
+                                   app_run : <appId> [LaunchOptionIndex] [Arguments]
+                            app_set_config : <AppID> <key> <value> - sets a config value for given app.
+                                app_status : app_status <appId>
+                                  app_stop : <appid> [force:0|1] stop this running app
+                             app_uninstall : <appId>
+                                app_update : app_update <appid> [-validate] [-language <lang>] [-beta <betaname>] [-betapassword <pwd>] make sure a Steam application is up-to-date
+                         app_update_cancel : <EAppUpdateError>
+                         app_update_status : app_update_status [appId]
+                            apps_installed : 
+                              apps_running : displays information about running games tracked by Steam 
+                          async_disconnect : async disconnect
+                           build_installer : <project file> <target folder> [beta key] [beta pwd]
+                                  ceg_wrap : ceg_wrap <appid> <orig filename> <stripped filename> <strips filename> : upload executable to back end for CEG wrapping
+                         clear_credentials : Clear cached credentials for current user. The next login will require authentication including an email or mobile confirmation.
+                           cm_force_change : Change CM List
+                            download_chunk : download_chunk <appid> <depotid> <sha>: download a single chunk from a depot
+                            download_depot : download_depot <appid> <depotid> [<target manifestid>] [<delta manifestid>] [<destination folder>]: download a single depot
+                             download_item : download_item <appid> <PublishedFileId> : download a workshop item directly 
+                          download_sources : Dumps list of download sources
+                                  drm_wrap : drm_wrap <appid> <input filename> <output filename> <toolname> <flags>: upload executable to back end for DRM wrapping
+                              dump_box_ips : dump the list of detected local box IP addresses
+                     dump_offline_playtime : Dumps recorded playtime sessions
+                  dump_scheduled_functions : usage: "dump_scheduled_functions" Displays internal Steam function callback timers
+                                      exit : Stops Steam client console
+                                      find : find substrings in console commands
+                         force_install_dir : force_install_dir <directory>
+                     get_download_throttle : 
+                                      help : Show help information
+                       http_cache_clearall : Delete all data from internal HTTP client and CEF browser
+                                 http_test : <optional_url> test HTTP connectivity via specified URL
+                                      info : Dump various Steam info
+                       library_folder_list : list all mounted Steam volumes
+                          licenses_for_app : <appid> : shows active licenses for appid
+                            licenses_print : display users's Steam3 licenses
+                             log_callbacks : usage: "log_callbacks <first callbackID> [last callbackID]
+                                   log_ipc : usage: "log_ipc [counts|verbose|#maxcount] <filter>" Enables IPC logging. Specifying "counts" or "verbose" is optional, defaulting to counts.
+                                     login : <username> [<password>] [<Steam guard code>] - login to Steam
+                             login_offline : <username> - login to Steam in offline mode
+                                    logoff : Disconnect from Steam and revoke saved login information
+                                     logon : see 'login'
+                                    logout : Disconnect from Steam and revoke saved login information
+                             manifest_dump : <filename> [0|1: include chunks]
+                                 mem_stats : Dump memory stats
+                            net_fake_state : {normal|NoLAN|CaptivePortal_Redirected|CaptivePortal_InPlace|NoInternet|NoSteam} Simulate network conditions
+                               net_msgdump : Dumps list of sent net messages
+                               net_msgspew : Spews sent and recv net messages
+                                  p2p_info : usage: "p2p_info" Displays the current state of the P2P networking subsystem.
+                        package_info_print : Dumps package info for packageID
+                                patch_dump : <filename> <depotid>
+                peer_content_server_status : Dumps status of peer content server
+                            print_sdr_ping : print current sdr ping location string 
+                                   profile : <seconds> profile for N seconds
+                                      quit : Stops Steam client console
+                      remote_client_dongle : remote_client_dongle [[connect] clientid ssid password]|disconnect|status|disable|enable|leddebug|lednodebug|[verbose 0|1]|[debugpdthresh thres (default -75)]
+                   remote_client_softapcmd : remote_client_softapcmd <softapcmd args>
+                            remote_clients : dump remote client info
+                    render_ipc_connections : usage: "render_ipc_connections
+                             run_app_build : run_app_build [-preview] [-desc <text>] <appbuildfile> : run app depot build as specified in appbuildfile
+                        run_app_build_http : run_app_build_http : alias for run_app_build
+                                 runscript : <scriptfile> - runs a console command script
+                serverbrowser_debug_toggle : Enable debug spew for server browser
+               serverbrowser_debug_verbose : Enable debug spew for server browser
+                     set_app_beta_password : set_app_beta_password <appid> -beta <name> -betapassword <pwd>  -- opt-in to the app beta with the given password
+                     set_download_throttle : set_download_throttle <kbps> <bPersistent = false>
+                                  set_spew : <group> <level> <loglevel> set spew levels for the given group
+                            set_spew_level : <SpewLevel LogLevel> Sets spew and log level for all groups
+                      set_steam_guard_code : <code> - authorize this computer by adding the Steam Guard email code
+                                   set_var : <name> <value>- Set the value of a Cvar
+                            shader_process : shader_process <appId> <bucketID> <optionalOverrideBasePath>
+                       sign_install_script : sign_install_script <appid> <input filename> <output filename> : upload install script to back end for signing
+                                stats_dump : stats_dump [filter] : dumps matching debug stats
+                             stats_monitor : stats_monitor <stat name> : monitor a debug stat value
+                               stats_reset : stats_reset [filter] : set matching stats back to 0
+                 swarm_get_bucket_manifest : <appid> <bucket_hw_id> <bucket_sw_id> - query Swarm bucket depot manifest, if depot built
+                      swarm_shader_compile : <work_dir> <threadCount>
+                     swarm_shader_download : <work_dir>
+                  swarm_shader_prepopulate : <work_dir>
+                       swarm_shader_upload : <work_dir>
+                         swarm_tc_download : swarm_tc_download <src_bucket_hw_id> <src_bucketsw_id> <work_dir>
+                           swarm_tc_upload : <src_bucket_hw_id> <src_bucketsw_id> <dst_bucket_hw_id> <dst_bucket_sw_id> <work_dir> <appid> <bucketid>
+         test_concurrent_textfilter_change : Queue up multiple text filter changes to the UI
+                              test_dropcon : Tests dropping a connection
+                      test_failnextconnect : Tests failing the next connection
+                    test_opus_voice_encode : test an opus voice encode
+                            test_reconnect : Reconnect after using test_failnextconnect&test_dropcon
+                               test_resume : Resumes from a system suspend
+                         test_voice_encode : test a voice encode
+                  timed_trial_add_playtime : timed_trial_add_playtime <appId> <seconds>: add trial app playtime (developer only)
+                timed_trial_reset_playtime : timed_trial_reset_playtime <appId> : reset trial app playtime (developer only)
+                        timed_trial_status : timed_trial_status <appId> : show time trial app status
+                              user_friends : Dumps list of friends
+                        verify_chunk_store : verify_chunk_store <appid> <depotid> <datafile> : run app depot build as specified in appbuildfile
+                                verify_vpk : verify_vpk <datafile> : verifies content of given VPK
+                          voice_game_usage : displays information about the game's use of Steam voice
+                       workshop_build_item : workshop_build_item <build config filename> : build a workshop item
+               workshop_create_legacy_item : workshop_create_legacy_item <appid> <workshop file> : build a legacy workshop item
+                    workshop_download_item : workshop_download_item <appid> <PublishedFileId> : download an item using the workshop system
+                           workshop_status : workshop_status <appId>
