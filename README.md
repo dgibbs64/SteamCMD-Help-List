@@ -27,7 +27,7 @@ A daily-updated copy of the built-in help output from [SteamCMD](https://develop
 | [steamcmd_help_convars.txt](steamcmd_help_convars.txt)         | `+help convars`     | Options and settings that affect this program session            |
 | [steamcmd_help_app_build.txt](steamcmd_help_app_build.txt)     | `+help app_build`   | Building Steam application content (licensed developers only)    |
 | [steamcmd_help_app_update.txt](steamcmd_help_app_update.txt)   | `+help app_update`  | Installing/updating a Steam application (e.g. dedicated servers) |
-| [steamcmd_find_all.txt](steamcmd_find_all.txt)                 | `+find .`           | Every command and convar SteamCMD knows about                    |
+| [steamcmd_find_all.txt](steamcmd_find_all.txt)                 | `+find a` … `+find z` | Every command and convar SteamCMD knows about                    |
 
 ## Usage
 
